@@ -15,13 +15,14 @@ public class BridgeLevelManagerController : MonoBehaviour
     public GameObject leftBridgePartPrefab;
     public GameObject rightBridgePartPrefab;
     public GameObject hero;
+    private LevelUIController levelUIController;
     private List<char> characters = new List<char>();
     private string selectedWord;
     private int curPosition = 0;
-    public int mistakesCount = 0;
     // Start is called before the first frame update
     void Start()
     {
+        levelUIController = FindObjectOfType<LevelUIController>();
         Init();
         
     }
@@ -53,16 +54,16 @@ public class BridgeLevelManagerController : MonoBehaviour
             curPosition++;
             if (curPosition == selectedWord.Length)
             {
-                hero.GetComponent<Rigidbody2D>().velocity = new Vector2(5f, 0);
+                StartCoroutine(GoToTheWin());
             }
              return true;
         }
         // MakeMistake();
-        mistakesCount++;
-        Debug.Log(mistakesCount);
-        if (mistakesCount == 3)
+        levelUIController.MakeMistake();
+       // Debug.Log(mistakesCount);
+        if (levelUIController.GetLifesCount() == 0)
         {
-            hero.GetComponent<Rigidbody2D>().velocity = new Vector2(5f, 0);
+            StartCoroutine(GoToTheLose());
         }
         return false;
 
@@ -139,12 +140,7 @@ public class BridgeLevelManagerController : MonoBehaviour
             , earthLeft.transform.position.y + (GetSpriteHeigth(earthLeft) / 2) - GetSpriteHeigth(middleBridgePartPrefab) / 2
             , 0f), Quaternion.identity);
     }
-    private void MakeMistake()
-    {
-        if(mistakesCount!=3)
-            mistakesCount++;
-    }
-
+    
     private float GetSpriteWidth(GameObject gameObject)
     {
         return gameObject.GetComponent<SpriteRenderer>().bounds.size.x;
@@ -153,4 +149,21 @@ public class BridgeLevelManagerController : MonoBehaviour
     {
         return gameObject.GetComponent<SpriteRenderer>().bounds.size.y;
     }
+
+    IEnumerator GoToTheWin()
+    {
+        hero.GetComponent<Rigidbody2D>().velocity = new Vector2(5f, 0);
+        yield return new WaitForSeconds(4f);
+        //GameObject lo = GameObject.Instantiate(letterObjectPrefab, new Vector3(1,1,0), Quaternion.identity);
+
+    }
+    IEnumerator GoToTheLose()
+    {
+        hero.GetComponent<Rigidbody2D>().velocity = new Vector2(5f, 0);
+        yield return new WaitForSeconds(4f);
+        levelUIController.LoseTheGame();
+        //GameObject lo = GameObject.Instantiate(letterObjectPrefab, new Vector3(1,1,0), Quaternion.identity);
+    }
+
+    
 }
