@@ -15,14 +15,16 @@ public class BubbleController : MonoBehaviour
     private bool correct;
     private Vector2 _targetVelocity;
     private float _delta = 0.01f;
+    private BubbleLevelManagerController _bubbleLevelManager;
 
     // Start is called before the first frame update
     void Start()
     {
         _textMeshPro = GetComponentInChildren<TextMeshPro>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _bubbleLevelManager = GameObject.FindObjectOfType<BubbleLevelManagerController>();
         correct = UnityEngine.Random.value < CorrectProbability;
-        _rigidbody2D.velocity = new Vector2(0, -VerticalSpeed);
+        _rigidbody2D.velocity = new Vector2(0, -VerticalSpeed * _bubbleLevelManager.getSpeedModifier());
         _targetVelocity = new Vector2(HorizontalSpeedDelta * UnityEngine.Random.Range(-1f, 1f), _rigidbody2D.velocity.y);
         _textMeshPro.text = generateEquation(correct);
     }
@@ -89,7 +91,10 @@ public class BubbleController : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log(correct);
+        if (correct)
+            _bubbleLevelManager.addScore();
+        else
+            _bubbleLevelManager.loseLife();
         GameObject.Destroy(gameObject);
     }
 
@@ -97,5 +102,12 @@ public class BubbleController : MonoBehaviour
     {
         _targetVelocity.x *= -1;
         _rigidbody2D.velocity = new Vector2(-_rigidbody2D.velocity.x, _rigidbody2D.velocity.y);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (correct)
+            _bubbleLevelManager.loseLife();
+        GameObject.Destroy(gameObject);
     }
 }
