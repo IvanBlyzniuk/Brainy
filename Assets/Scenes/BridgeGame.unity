@@ -500,6 +500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeStart: 5
+  isActive: 1
   timerText: {fileID: 0}
 --- !u!114 &1626536738
 MonoBehaviour:
@@ -865,14 +866,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 367085874, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 483109164, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1795304732}
-    - target: {fileID: 483109164, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 3736849309485196904, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
       propertyPath: m_RootOrder
       value: 5
