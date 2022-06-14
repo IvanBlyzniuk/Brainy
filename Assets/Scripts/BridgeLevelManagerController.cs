@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class BridgeLevelManagerController : MonoBehaviour
 {
@@ -15,13 +16,20 @@ public class BridgeLevelManagerController : MonoBehaviour
     public GameObject leftBridgePartPrefab;
     public GameObject rightBridgePartPrefab;
     public GameObject hero;
+    public TimerController timer;
     private LevelUIController levelUIController;
-    private List<char> characters = new List<char>();
+    private List<char> characters;
+    private List<GameObject> bridgeParts;
     private string selectedWord;
     private int curPosition = 0;
+    private bool isAlive = true;
+    private Vector3 instatntEarthLeftPosition;
+    private Vector3 instatntEarthRightPosition;
+
     // Start is called before the first frame update
     void Start()
     {
+        timer = FindObjectOfType<TimerController>();
         levelUIController = FindObjectOfType<LevelUIController>();
         Init();
         
@@ -30,14 +38,20 @@ public class BridgeLevelManagerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log(timer.GetCurrentTime());
+        if(timer.GetCurrentTime()<=0 && isAlive)
+        {
+            isAlive = false;
+            StartCoroutine(GoToTheLose());
+        }
     }
 
     private string ChooseTheWord()
     {
         string word = "";
         StreamReader reader = new StreamReader(path);
-        int stop = Random.Range(1, dictionaryLength);
+        int stop = Random.Range(1, dictionaryLength+1);
+        
         for(int i = 0; i < stop; i++)
         {
             word = reader.ReadLine();
@@ -48,22 +62,26 @@ public class BridgeLevelManagerController : MonoBehaviour
 
     public bool CheckLetter(char letter)
     {
-        if (selectedWord[curPosition] == letter)
+        if (isAlive)
         {
-            BuildBridge();
-            curPosition++;
-            if (curPosition == selectedWord.Length)
+            if (selectedWord[curPosition] == letter)
             {
-                StartCoroutine(GoToTheWin());
+                BuildBridge();
+                curPosition++;
+                if (curPosition == selectedWord.Length)
+                {
+                    StartCoroutine(GoToTheWin());
+                }
+                return true;
             }
-             return true;
-        }
-        // MakeMistake();
-        levelUIController.MakeMistake();
-       // Debug.Log(mistakesCount);
-        if (levelUIController.GetLifesCount() == 0)
-        {
-            StartCoroutine(GoToTheLose());
+            // MakeMistake();
+            levelUIController.MakeMistake();
+            // Debug.Log(mistakesCount);
+            if (levelUIController.GetLifesCount() == 0)
+            {
+                isAlive = false;
+                StartCoroutine(GoToTheLose());
+            }
         }
         return false;
 
@@ -90,7 +108,13 @@ public class BridgeLevelManagerController : MonoBehaviour
     }
     private void Init()
     {
-        
+        instatntEarthLeftPosition = earthLeft.transform.position;
+        instatntEarthRightPosition = earthRight.transform.position;
+        timer.timeStart = 5;
+        timer.isActive = true;
+        characters = new List<char>();
+        bridgeParts = new List<GameObject>();
+        curPosition = 0;
         StreamReader reader = new StreamReader(path);
         while (reader.ReadLine() != null)
         {
@@ -98,6 +122,7 @@ public class BridgeLevelManagerController : MonoBehaviour
         }
         reader.Close();
         selectedWord = ChooseTheWord();
+        dictionaryLength = 0;
         Debug.Log(selectedWord);
 
         for (int i = 0; i < selectedWord.Length; i++)
@@ -115,6 +140,8 @@ public class BridgeLevelManagerController : MonoBehaviour
             lo.GetComponent<LetterController>().letter = characters[i];
             lo.GetComponentInChildren<TextMeshPro>().text = characters[i].ToString();
         }
+        hero.transform.position = new Vector3(-8f,0f,0f);
+        
     }
     private void BuildBridge()
     {
@@ -139,6 +166,8 @@ public class BridgeLevelManagerController : MonoBehaviour
             GetSpriteWidth(middleBridgePartPrefab) / 2
             , earthLeft.transform.position.y + (GetSpriteHeigth(earthLeft) / 2) - GetSpriteHeigth(middleBridgePartPrefab) / 2
             , 0f), Quaternion.identity);
+
+        bridgeParts.Add(bridgePart);
     }
     
     private float GetSpriteWidth(GameObject gameObject)
@@ -152,18 +181,33 @@ public class BridgeLevelManagerController : MonoBehaviour
 
     IEnumerator GoToTheWin()
     {
+        timer.isActive = false;
         hero.GetComponent<Rigidbody2D>().velocity = new Vector2(5f, 0);
+        levelUIController.AddScore(5);
         yield return new WaitForSeconds(4f);
+        RecreateGameConditions();
+        
         //GameObject lo = GameObject.Instantiate(letterObjectPrefab, new Vector3(1,1,0), Quaternion.identity);
 
     }
     IEnumerator GoToTheLose()
     {
+        timer.isActive = false;
         hero.GetComponent<Rigidbody2D>().velocity = new Vector2(5f, 0);
         yield return new WaitForSeconds(4f);
         levelUIController.LoseTheGame();
         //GameObject lo = GameObject.Instantiate(letterObjectPrefab, new Vector3(1,1,0), Quaternion.identity);
     }
 
-    
+    private void RecreateGameConditions()
+    {
+        foreach (GameObject gameObject in bridgeParts)
+        {
+            Destroy(gameObject);
+        }
+        earthLeft.transform.position = instatntEarthLeftPosition;
+        earthRight.transform.position = instatntEarthRightPosition;
+        hero.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        Init();
+    }
 }
