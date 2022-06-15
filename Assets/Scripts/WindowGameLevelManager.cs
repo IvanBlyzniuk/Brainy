@@ -16,6 +16,11 @@ public class WindowGameLevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        pictures = new PictureController[4];
+        pictures[0] = picture1;
+        pictures[1] = picture2;
+        pictures[2] = picture3;
+        pictures[3] = picture4;
         StartSequence();
     }
 
