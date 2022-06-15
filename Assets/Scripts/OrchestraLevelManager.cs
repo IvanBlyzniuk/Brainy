@@ -76,7 +76,7 @@ public class OrchestraLevelManager : MonoBehaviour
 
                 curPosition++;
                 StartCoroutine(controllers[number].PlayMusic());
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(2f);
                 if (curPosition == sequenceLength)
                 {
                     winningMusic.Play();
