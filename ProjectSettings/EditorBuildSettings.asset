@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main Menu.unity
     guid: 8d78e1a8fb44acd40a23277a58036193
+  - enabled: 1
+    path: Assets/Scenes/Orchestral game.unity
+    guid: 4a467d163a077e94daaf76d566b5ddbd
+  - enabled: 1
+    path: Assets/Scenes/BridgeGame.unity
+    guid: 08dc8601191b78542b5581b2f5e295eb
   m_configObjects: {}
