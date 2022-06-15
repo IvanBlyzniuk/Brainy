@@ -17,6 +17,7 @@ public class BubbleLevelManagerController : MonoBehaviour
     private int lives = 3;
     private int livesLeft;
     private float speedModifier = 1;
+    private LevelUIController levelUIController;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class BubbleLevelManagerController : MonoBehaviour
         _spawnLB = leftSpawningBound.transform.position.x;
         _spawnRB = rightSpawningBound.transform.position.x;
         _spawnY = leftSpawningBound.transform.position.y;
+        levelUIController = GameObject.FindObjectOfType<LevelUIController>();
         timeTillSpawnLeft = 0;
         livesLeft = lives;
     }
@@ -58,6 +60,7 @@ public class BubbleLevelManagerController : MonoBehaviour
     public void loseLife()
     {
         livesLeft--;
+        levelUIController.MakeMistake();
         if (livesLeft == 0)
             Time.timeScale = 0; //TODO: change to lose
     }
