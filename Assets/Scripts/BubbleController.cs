@@ -37,33 +37,33 @@ public class BubbleController : MonoBehaviour
         {
             case 0:
                 sign = '*';
-                n1 = UnityEngine.Random.Range(1, 9);
-                n2 = UnityEngine.Random.Range(1, 9);
+                n1 = UnityEngine.Random.Range(1, 10);
+                n2 = UnityEngine.Random.Range(1, 10);
                 result = n1 * n2;
                 break;
             case 1:
                 sign = '+';
-                n1 = UnityEngine.Random.Range(1, 9);
-                n2 = UnityEngine.Random.Range(1, 9);
+                n1 = UnityEngine.Random.Range(1, 10);
+                n2 = UnityEngine.Random.Range(1, 10);
                 result = n1 + n2;
                 break;
             case 2:
                 sign = '÷';
-                n2 = UnityEngine.Random.Range(1, 9);
-                result = UnityEngine.Random.Range(1, 9);
+                n2 = UnityEngine.Random.Range(1, 10);
+                result = UnityEngine.Random.Range(1, 10);
                 n1 = result * n2;
                 break;
             case 3:
                 sign = '-';
-                n2 = UnityEngine.Random.Range(1, 9);
-                result = UnityEngine.Random.Range(1, 9);
+                n2 = UnityEngine.Random.Range(1, 10);
+                result = UnityEngine.Random.Range(1, 10);
                 n1 = result + n2;
                 break;
         }
         if(!correct)
         {
             int newResult;
-            newResult = UnityEngine.Random.Range(-5, 4);
+            newResult = UnityEngine.Random.Range(-5, 5);
             if (newResult >= 0)
                 newResult++;
             if (result == 0 && newResult < 0)

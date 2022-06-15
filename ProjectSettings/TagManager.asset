@@ -38,8 +38,14 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: WindowGame Background
+    uniqueID: 3378646033
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: WindowGame Foreground
+    uniqueID: 1894222325
     locked: 0
   - name: HUD
     uniqueID: 3578598123
