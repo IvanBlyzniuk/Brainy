@@ -8,17 +8,28 @@ public class MusicianController : MonoBehaviour
     public Sprite silent;
     public Sprite playingMusic;
     public AudioSource music;
+    public int id;
+    private OrchestraLevelManager levelManager;
+    private SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
     {
-        
+        levelManager = FindObjectOfType<OrchestraLevelManager>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public IEnumerator PlayMusic()
     {
-        GetComponent<SpriteRenderer>().sprite = playingMusic;
+        levelManager.isScreenActive = false;
+        spriteRenderer.sprite = playingMusic;
         music.Play();
-        yield return new WaitForSeconds(1.1f);
-        GetComponent<SpriteRenderer>().sprite = silent;
+        yield return new WaitForSeconds(0.9f);
+        spriteRenderer.sprite = silent;
+        levelManager.isScreenActive = true;
+    }
+
+    private void OnMouseDown()
+    {
+        StartCoroutine(levelManager.CheckChoosenMusician(id));
     }
 }

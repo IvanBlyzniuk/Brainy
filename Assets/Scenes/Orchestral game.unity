@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 107116187}
   - component: {fileID: 107116186}
   - component: {fileID: 107116185}
+  - component: {fileID: 107116188}
   m_Layer: 0
   m_Name: Musician3
   m_TagString: Untagged
@@ -234,6 +235,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &107116188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107116184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 983c15c2d23347946b9e5c107d1b92af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  silent: {fileID: -670483622, guid: 23957688abaf68d428dfb890e6f012a5, type: 3}
+  playingMusic: {fileID: 399259559, guid: 23957688abaf68d428dfb890e6f012a5, type: 3}
+  music: {fileID: 1234012363}
+  id: 2
 --- !u!1 &116068037
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,6 +390,7 @@ GameObject:
   - component: {fileID: 333359948}
   - component: {fileID: 333359947}
   - component: {fileID: 333359946}
+  - component: {fileID: 333359949}
   m_Layer: 0
   m_Name: Musician2
   m_TagString: Untagged
@@ -473,6 +491,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &333359949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333359945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 983c15c2d23347946b9e5c107d1b92af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  silent: {fileID: 227577718, guid: 23957688abaf68d428dfb890e6f012a5, type: 3}
+  playingMusic: {fileID: 907111603, guid: 23957688abaf68d428dfb890e6f012a5, type: 3}
+  music: {fileID: 1139594718}
+  id: 1
 --- !u!1 &587531537
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,6 +518,7 @@ GameObject:
   - component: {fileID: 587531540}
   - component: {fileID: 587531539}
   - component: {fileID: 587531538}
+  - component: {fileID: 587531541}
   m_Layer: 0
   m_Name: Musician4
   m_TagString: Untagged
@@ -584,6 +619,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &587531541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 587531537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 983c15c2d23347946b9e5c107d1b92af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  silent: {fileID: -718437592, guid: 23957688abaf68d428dfb890e6f012a5, type: 3}
+  playingMusic: {fileID: -2036611278, guid: 23957688abaf68d428dfb890e6f012a5, type: 3}
+  music: {fileID: 1624161515}
+  id: 3
 --- !u!1 &732540248
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,6 +960,7 @@ MonoBehaviour:
   silent: {fileID: -697466532, guid: 23957688abaf68d428dfb890e6f012a5, type: 3}
   playingMusic: {fileID: 1489737417, guid: 23957688abaf68d428dfb890e6f012a5, type: 3}
   music: {fileID: 116068039}
+  id: 0
 --- !u!61 &1293746899
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1243,7 +1295,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b16cddea83205c043803c02659122532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sequenceLength: 3
   musician1: {fileID: 1293746897}
+  musician2: {fileID: 333359945}
+  musician3: {fileID: 107116184}
+  musician4: {fileID: 587531537}
+  isScreenActive: 1
 --- !u!4 &1710786742
 Transform:
   m_ObjectHideFlags: 0
