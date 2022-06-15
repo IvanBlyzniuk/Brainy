@@ -77,7 +77,7 @@ public class BridgeLevelManagerController : MonoBehaviour
             // MakeMistake();
             levelUIController.MakeMistake();
             // Debug.Log(mistakesCount);
-            if (levelUIController.GetLifesCount() == 0)
+            if (levelUIController.GetLifesCount() <= 0)
             {
                 isAlive = false;
                 StartCoroutine(GoToTheLose());

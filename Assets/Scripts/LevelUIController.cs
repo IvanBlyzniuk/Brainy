@@ -34,9 +34,11 @@ public class LevelUIController : MonoBehaviour
         lifesCount--;
         UpdateLifeMeter();
     }
+    //TODO remind Vania + make end game screen
     public void LoseTheGame()
     {
-        SceneManager.LoadScene("BridgeGame");
+        Debug.Log("End");
+       
     }
     public int GetLifesCount()
     {

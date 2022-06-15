@@ -18,11 +18,14 @@ public class OrchestraLevelManager : MonoBehaviour
     private MusicianController musician2Controller;
     private MusicianController musician3Controller;
     private MusicianController musician4Controller;
+    private LevelUIController levelUIController;
     public bool isScreenActive = true;
+    public AudioSource winningMusic;
     // Start is called before the first frame update
     void Start()
     {
         controllers = new List<MusicianController>();
+        levelUIController = FindObjectOfType<LevelUIController>();
         musician1Controller = musician1.GetComponent<MusicianController>();
         musician2Controller = musician2.GetComponent<MusicianController>();
         musician3Controller = musician3.GetComponent<MusicianController>();
@@ -73,14 +76,15 @@ public class OrchestraLevelManager : MonoBehaviour
 
                 curPosition++;
                 StartCoroutine(controllers[number].PlayMusic());
+                yield return new WaitForSeconds(1f);
                 if (curPosition == sequenceLength)
                 {
+                    winningMusic.Play();
                     score++;
                     Debug.Log(score);
-                    if (score == 3)
+                    if (score % 3 == 0)
                     {
                         sequenceLength++;
-                        score = 0;
                     }
                     curPosition = 0;
                     isScreenActive = false;
@@ -90,6 +94,11 @@ public class OrchestraLevelManager : MonoBehaviour
             }
             else
             {
+                levelUIController.MakeMistake();
+                if(levelUIController.GetLifesCount() <= 0)
+                {
+                    levelUIController.LoseTheGame();
+                }
                 Debug.Log("Bad");
             }
 
