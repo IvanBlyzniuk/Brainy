@@ -5,7 +5,9 @@ using UnityEngine;
 public class OrchestraLevelManager : MonoBehaviour
 {
 
-    private int level;
+    public int sequenceLength;
+    private int score = 0;
+    private int curPosition = 0;
     private List<int> inputs;
     private List<MusicianController> controllers;
     public GameObject musician1;
@@ -16,13 +18,21 @@ public class OrchestraLevelManager : MonoBehaviour
     private MusicianController musician2Controller;
     private MusicianController musician3Controller;
     private MusicianController musician4Controller;
+    public bool isScreenActive = true;
     // Start is called before the first frame update
     void Start()
     {
+        controllers = new List<MusicianController>();
         musician1Controller = musician1.GetComponent<MusicianController>();
         musician2Controller = musician2.GetComponent<MusicianController>();
         musician3Controller = musician3.GetComponent<MusicianController>();
         musician4Controller = musician4.GetComponent<MusicianController>();
+        controllers.Add(musician1Controller);
+        controllers.Add(musician2Controller);
+        controllers.Add(musician3Controller);
+        controllers.Add(musician4Controller);
+        Init();
+        
     }
 
     // Update is called once per frame
@@ -33,21 +43,56 @@ public class OrchestraLevelManager : MonoBehaviour
 
     private void Init()
     {
+        isScreenActive = true;
         inputs = new List<int>();
-        for (int i = 0; i < level; i++)
+        for (int i = 0; i < sequenceLength; i++)
         {
             int input = Random.Range(0,4);
             inputs.Add(input);
         }
+        StartCoroutine(PlayMusicSequence());
     }
 
-    private IEnumerable PlayMusicSequence()
+    private IEnumerator PlayMusicSequence()
     {
         for(int i = 0; i < inputs.Count; i++)
         {
-            
-            yield return new WaitForSeconds(1.5f);
+            StartCoroutine(controllers[inputs[i]].PlayMusic());
+            yield return new WaitForSeconds(1f);
         }
-        
+        isScreenActive = true;
+    }
+
+    public IEnumerator CheckChoosenMusician(int number)
+    {
+        if (isScreenActive)
+        {
+            
+            if (inputs[curPosition] == number)
+            {
+
+                curPosition++;
+                StartCoroutine(controllers[number].PlayMusic());
+                if (curPosition == sequenceLength)
+                {
+                    score++;
+                    Debug.Log(score);
+                    if (score == 3)
+                    {
+                        sequenceLength++;
+                        score = 0;
+                    }
+                    curPosition = 0;
+                    isScreenActive = false;
+                    yield return new WaitForSeconds(3f);
+                    Init();
+                }
+            }
+            else
+            {
+                Debug.Log("Bad");
+            }
+
+        }
     }
 }
