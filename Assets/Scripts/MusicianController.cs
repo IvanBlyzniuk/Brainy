@@ -23,7 +23,7 @@ public class MusicianController : MonoBehaviour
         levelManager.isScreenActive = false;
         spriteRenderer.sprite = playingMusic;
         music.Play();
-        yield return new WaitForSeconds(0.9f);
+        yield return new WaitForSeconds(0.5f);
         spriteRenderer.sprite = silent;
         levelManager.isScreenActive = true;
     }
