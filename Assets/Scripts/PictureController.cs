@@ -8,12 +8,10 @@ public class PictureController : MonoBehaviour
     public SpriteRenderer ground;
     public SpriteRenderer building;
     public SpriteRenderer theObject;
-    public int index;
     private WindowGameLevelManager levelManager;
     // Start is called before the first frame update
     void Start()
     {
-        Configure(2, 2, 2, 2);
         levelManager = FindObjectOfType<WindowGameLevelManager>();
     }
 
