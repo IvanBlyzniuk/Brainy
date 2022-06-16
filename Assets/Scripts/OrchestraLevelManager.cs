@@ -24,6 +24,7 @@ public class OrchestraLevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        winningMusic.volume = PlayerPrefs.GetFloat("Volume");
         controllers = new List<MusicianController>();
         levelUIController = FindObjectOfType<LevelUIController>();
         musician1Controller = musician1.GetComponent<MusicianController>();
@@ -78,7 +79,7 @@ public class OrchestraLevelManager : MonoBehaviour
                 StartCoroutine(controllers[number].PlayMusic());
                 if (curPosition == sequenceLength)
                 {
-                    yield return new WaitForSeconds(1.2f);
+                    yield return new WaitForSeconds(1f);
                     winningMusic.Play();
                     score++;
                     Debug.Log(score);
@@ -88,7 +89,7 @@ public class OrchestraLevelManager : MonoBehaviour
                     }
                     curPosition = 0;
                     isScreenActive = false;
-                    yield return new WaitForSeconds(3f);
+                    yield return new WaitForSeconds(1.8f);
                     Init();
                 }
             }

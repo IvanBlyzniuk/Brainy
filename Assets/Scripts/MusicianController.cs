@@ -14,6 +14,7 @@ public class MusicianController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        music.volume = PlayerPrefs.GetFloat("Volume");
         levelManager = FindObjectOfType<OrchestraLevelManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }

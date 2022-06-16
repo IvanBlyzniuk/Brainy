@@ -11,7 +11,7 @@ public class TimerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       timerText = GetComponentInChildren<TextMeshPro>();
+       timerText = GetComponent<TextMeshPro>();
        timerText.text = timeStart.ToString();
     }
 
