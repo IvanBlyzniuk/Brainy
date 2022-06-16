@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class WindowGameLevelManager : MonoBehaviour
@@ -12,12 +13,28 @@ public class WindowGameLevelManager : MonoBehaviour
     public Transform cameraPos1;
     public Transform cameraPos2;
     public Transform mainCameraTransform;
+    public TextMeshPro promptText;
+    public TimerController timerController;
+    public int timeToRemember;
+
+    private AudioSource audioSource;
+    private LevelUIController levelUIController;
     private PictureController[] pictures;
     private int[] correctPictureParts;
     private int correctPictureIndex;
+    
+    //String array for corresponding messages
+    private string[] skyMsg = new string[]{"sky1", "sky2", "sky3", "sky4" };
+    private string[] buildingMsg = new string[] { "building1", "building2", "building3", "building4" };
+    private string[] groundMsg = new string[] { "ground1", "ground2", "ground3", "ground4" };
+    private string[] objectMsg = new string[] { "object1", "object2", "object3", "object4" };
+
     // Start is called before the first frame update
     void Start()
     {
+        levelUIController = FindObjectOfType<LevelUIController>();
+        audioSource = GetComponent<AudioSource>();
+        audioSource.volume = PlayerPrefs.GetFloat("Volume");
         pictures = new PictureController[4];
         pictures[0] = picture1;
         pictures[1] = picture2;
@@ -29,11 +46,17 @@ public class WindowGameLevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(timerController.isActive && timerController.GetCurrentTime() <= 0)
+        {
+            timerController.isActive = false;
+            goToImages();
+        }
     }
 
     private void StartSequence()
     {
+        timerController.timeStart = timeToRemember;
+        timerController.isActive = true;
         correctPictureParts = new int[4];
         for (int i = 0; i < correctPictureParts.Length; i++)
             correctPictureParts[i] = UnityEngine.Random.Range(1, 5);
@@ -41,11 +64,15 @@ public class WindowGameLevelManager : MonoBehaviour
         Debug.Log($"Correct: Sky = {correctPictureParts[0]} Ground = {correctPictureParts[1]} Building = {correctPictureParts[2]} Object = {correctPictureParts[3]}");
 
         mainCameraTransform.position = new Vector3(cameraPos1.position.x, mainCameraTransform.position.y, mainCameraTransform.position.z);
-        //TODO: show text
+        promptText.text = $"Correct: Sky = {skyMsg[correctPictureParts[0] - 1]} Ground = {groundMsg[correctPictureParts[1] - 1]} Building = {buildingMsg[correctPictureParts[2] - 1]} Object = {objectMsg[correctPictureParts[3] - 1]}";      
+    }
+
+    private void goToImages()
+    {
         shufflePictures();
         pictures[0].Configure(correctPictureParts[0], correctPictureParts[1], correctPictureParts[2], correctPictureParts[3]);
-        generateIncorret(pictures[1],correctPictureParts);
-        generateIncorret(pictures[2],correctPictureParts);
+        generateIncorret(pictures[1], correctPictureParts);
+        generateIncorret(pictures[2], correctPictureParts);
         generateVeryIncorrect(pictures[3], correctPictureParts);
 
         mainCameraTransform.position = new Vector3(cameraPos2.position.x, mainCameraTransform.position.y, mainCameraTransform.position.z);
@@ -101,15 +128,24 @@ public class WindowGameLevelManager : MonoBehaviour
         list[pos2] = tmp;
     }
 
-    public void checkPicture(PictureController pictureToCheck)
+    public IEnumerator checkPicture(PictureController pictureToCheck)
     {
         if (pictureToCheck == pictures[0])
         {
             Debug.Log("correct");
+            audioSource.Play();
+            yield return new WaitForSeconds(1);
+            StartSequence();
         }
         else
         {
             Debug.Log("incorrect");
+            levelUIController.MakeMistake();
+            if (levelUIController.GetLifesCount() > 0)
+                StartSequence();
+            else
+                Time.timeScale = 0; //TODO: Go to end screen
         }
     }
+
 }

@@ -7,7 +7,7 @@ public class TimerController : MonoBehaviour
 {
     public float timeStart = 20;
     public bool isActive = true;
-    public TextMeshPro timerText;
+    private TextMeshPro timerText;
     // Start is called before the first frame update
     void Start()
     {
