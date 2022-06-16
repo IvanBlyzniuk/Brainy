@@ -5,7 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
-    public float volume = 0.5f;
+    private int isSoundInitialized;
+    private float volume;
+
+    void Start()
+    {
+        volume = PlayerPrefs.GetFloat("Volume");
+        isSoundInitialized = PlayerPrefs.GetInt("IsSoundInitialized");
+        //Debug.Log(isSoundInitialized);
+        if(isSoundInitialized == 0)
+        {
+            volume = 0.5f;
+            PlayerPrefs.SetInt("IsSoundInitialized", 1);
+        }
+        Debug.Log(volume);
+    }
     public void PlayBridgeGame()
     {
         PlayerPrefs.SetFloat("Volume",volume);
