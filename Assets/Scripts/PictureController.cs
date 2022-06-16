@@ -31,6 +31,6 @@ public class PictureController : MonoBehaviour
 
     private void OnMouseDown()
     {
-        levelManager.checkPicture(this);
+        StartCoroutine(levelManager.checkPicture(this));
     }
 }
