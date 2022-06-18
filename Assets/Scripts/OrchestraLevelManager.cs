@@ -35,7 +35,7 @@ public class OrchestraLevelManager : MonoBehaviour
         controllers.Add(musician2Controller);
         controllers.Add(musician3Controller);
         controllers.Add(musician4Controller);
-        Init();
+        StartCoroutine(WaitUntillTheFirstStart());
         
     }
 
@@ -104,5 +104,10 @@ public class OrchestraLevelManager : MonoBehaviour
             }
 
         }
+    }
+    private IEnumerator WaitUntillTheFirstStart()
+    {
+        yield return new WaitForSeconds(1f);
+        Init();  
     }
 }
