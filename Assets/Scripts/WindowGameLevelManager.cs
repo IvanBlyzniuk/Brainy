@@ -141,10 +141,10 @@ public class WindowGameLevelManager : MonoBehaviour
         {
             Debug.Log("incorrect");
             levelUIController.MakeMistake();
-            if (levelUIController.GetLifesCount() > 0)
-                StartSequence();
-            else
-                Time.timeScale = 0; //TODO: Go to end screen
+            if(levelUIController.GetLifesCount() == 0)
+            {
+                Time.timeScale = 0;//TODO: Go to end screen
+            }
         }
     }
 

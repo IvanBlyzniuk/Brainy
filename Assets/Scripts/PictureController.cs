@@ -8,11 +8,18 @@ public class PictureController : MonoBehaviour
     public SpriteRenderer ground;
     public SpriteRenderer building;
     public SpriteRenderer theObject;
+    public SpriteRenderer border;
+
     private WindowGameLevelManager levelManager;
+    private Sprite borderSprite;
+    private Sprite borderSelectedSprite;
     // Start is called before the first frame update
     void Start()
     {
         levelManager = FindObjectOfType<WindowGameLevelManager>();
+        borderSprite = Resources.Load<Sprite>($"Sprites/Window Game/Frame regular");
+        borderSelectedSprite = Resources.Load<Sprite>($"Sprites/Window Game/Frame selected");
+        border.sprite = borderSprite;
     }
 
     // Update is called once per frame
@@ -31,6 +38,17 @@ public class PictureController : MonoBehaviour
 
     private void OnMouseDown()
     {
+        borderSprite = borderSelectedSprite;
         StartCoroutine(levelManager.checkPicture(this));
+    }
+
+    private void OnMouseEnter()
+    {
+        border.sprite = borderSelectedSprite;
+    }
+
+    private void OnMouseExit()
+    {
+        border.sprite = borderSprite;
     }
 }
