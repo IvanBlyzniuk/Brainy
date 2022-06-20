@@ -1021,6 +1021,10 @@ PrefabInstance:
       propertyPath: m_RenderMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3689529574177041893, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
+      propertyPath: sceneName
+      value: Orchestral game
+      objectReference: {fileID: 0}
     - target: {fileID: 3736849309485196904, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1590,6 +1594,7 @@ MonoBehaviour:
   musician3: {fileID: 107116184}
   musician4: {fileID: 587531537}
   isScreenActive: 1
+  isPlayingMusicSequence: 0
   winningMusic: {fileID: 595590474}
 --- !u!4 &1710786742
 Transform:

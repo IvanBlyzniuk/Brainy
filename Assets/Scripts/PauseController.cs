@@ -40,4 +40,26 @@ public class PauseController : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("Main Menu");
     }
+    public void VolumeUp()
+    {
+        foreach (AudioSource a in FindObjectsOfType<AudioSource>())
+        {
+            if (a.volume < 1f)
+                a.volume += 0.1f;
+            if (a.volume > 1f)
+                a.volume = 1f;
+        }
+        PlayerPrefs.SetFloat("Volume", FindObjectOfType<AudioSource>().volume);
+    }
+    public void VolumeDown()
+    {
+        foreach (AudioSource a in FindObjectsOfType<AudioSource>())
+        {
+            if (a.volume > 0f)
+                a.volume -= 0.1f;
+            if (a.volume < 0f)
+                a.volume = 0f;
+        }
+        PlayerPrefs.SetFloat("Volume", FindObjectOfType<AudioSource>().volume);
+    }
 }

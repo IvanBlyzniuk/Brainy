@@ -20,6 +20,7 @@ public class OrchestraLevelManager : MonoBehaviour
     private MusicianController musician4Controller;
     private LevelUIController levelUIController;
     public bool isScreenActive = true;
+    public bool isPlayingMusicSequence = false;
     public AudioSource winningMusic;
     // Start is called before the first frame update
     void Start()
@@ -47,13 +48,14 @@ public class OrchestraLevelManager : MonoBehaviour
 
     private void Init()
     {
-        isScreenActive = true;
+        
         inputs = new List<int>();
         for (int i = 0; i < sequenceLength; i++)
         {
             int input = Random.Range(0,4);
             inputs.Add(input);
         }
+        isPlayingMusicSequence = true;
         StartCoroutine(PlayMusicSequence());
     }
 
@@ -65,11 +67,12 @@ public class OrchestraLevelManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
         isScreenActive = true;
+        isPlayingMusicSequence = false;
     }
 
     public IEnumerator CheckChoosenMusician(int number)
     {
-        if (isScreenActive)
+        if (isScreenActive && !isPlayingMusicSequence)
         {
             
             if (inputs[curPosition] == number)

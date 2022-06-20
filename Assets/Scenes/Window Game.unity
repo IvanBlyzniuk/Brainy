@@ -146,6 +146,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Pause
       objectReference: {fileID: 0}
+    - target: {fileID: 3689529574177041893, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
+      propertyPath: sceneName
+      value: Window Game
+      objectReference: {fileID: 0}
     - target: {fileID: 3736849309485196904, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
       propertyPath: m_RootOrder
       value: 1
