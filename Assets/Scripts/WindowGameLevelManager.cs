@@ -22,6 +22,7 @@ public class WindowGameLevelManager : MonoBehaviour
     private PictureController[] pictures;
     private int[] correctPictureParts;
     private int correctPictureIndex;
+    private int score;
     
     //String array for corresponding messages
     private string[] skyMsg = new string[]{"sky1", "sky2", "sky3", "sky4" };
