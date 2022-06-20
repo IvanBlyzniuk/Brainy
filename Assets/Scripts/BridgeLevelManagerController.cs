@@ -7,8 +7,18 @@ using UnityEngine.SceneManagement;
 
 public class BridgeLevelManagerController : MonoBehaviour
 {
-    private  string path = "Assets/Files/dictionary.txt";
+    private bool isAlive = true;
+    private bool lost = false;
     private int dictionaryLength = 0;
+    private int curPosition = 0;
+    private int level = 0;
+    private string path = "Assets/Files/dictionary.txt";
+    private string selectedWord;
+    private List<char> characters;
+    private List<GameObject> objects;
+    private Vector3 instatntEarthLeftPosition;
+    private Vector3 instatntEarthRightPosition;
+    private LevelUIController levelUIController;
     public GameObject earthLeft;
     public GameObject earthRight;
     public GameObject letterObjectPrefab;
@@ -17,33 +27,29 @@ public class BridgeLevelManagerController : MonoBehaviour
     public GameObject rightBridgePartPrefab;
     public GameObject hero;
     public TimerController timer;
-    private LevelUIController levelUIController;
-    private List<char> characters;
-    private List<GameObject> bridgeParts;
-    private string selectedWord;
-    private int curPosition = 0;
-    private bool isAlive = true;
-    private Vector3 instatntEarthLeftPosition;
-    private Vector3 instatntEarthRightPosition;
-
-    // Start is called before the first frame update
+   
+    
     void Start()
     {
         timer = FindObjectOfType<TimerController>();
         levelUIController = FindObjectOfType<LevelUIController>();
+        instatntEarthLeftPosition = earthLeft.transform.position;
+        instatntEarthRightPosition = earthRight.transform.position;
         Init();
-        
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        Debug.Log(timer.GetCurrentTime());
-        if(timer.GetCurrentTime()<=0 && isAlive)
+        if (timer.GetCurrentTime()<=0 && isAlive)
         {
             isAlive = false;
+            levelUIController.MakeMistake();
+            if (levelUIController.GetLifesCount() == 0)
+                lost = true;
+            Debug.Log("Lose");
             StartCoroutine(GoToTheLose());
-        }
+        } 
     }
 
     private string ChooseTheWord()
@@ -80,6 +86,7 @@ public class BridgeLevelManagerController : MonoBehaviour
             if (levelUIController.GetLifesCount() <= 0)
             {
                 isAlive = false;
+                lost = true;
                 StartCoroutine(GoToTheLose());
             }
         }
@@ -108,13 +115,14 @@ public class BridgeLevelManagerController : MonoBehaviour
     }
     private void Init()
     {
-        instatntEarthLeftPosition = earthLeft.transform.position;
-        instatntEarthRightPosition = earthRight.transform.position;
-        timer.timeStart = 5;
+        isAlive = true;
         timer.isActive = true;
+        timer.timeStart = GetTimeForLevel();
         characters = new List<char>();
-        bridgeParts = new List<GameObject>();
+        Debug.Log("Created array");
+        objects = new List<GameObject>();
         curPosition = 0;
+        dictionaryLength = 0;
         StreamReader reader = new StreamReader(path);
         while (reader.ReadLine() != null)
         {
@@ -122,9 +130,6 @@ public class BridgeLevelManagerController : MonoBehaviour
         }
         reader.Close();
         selectedWord = ChooseTheWord();
-        dictionaryLength = 0;
-        Debug.Log(selectedWord);
-
         for (int i = 0; i < selectedWord.Length; i++)
         {
             characters.Add(selectedWord[i]);
@@ -139,6 +144,7 @@ public class BridgeLevelManagerController : MonoBehaviour
                 , 3f, 0f), Quaternion.identity);
             lo.GetComponent<LetterController>().letter = characters[i];
             lo.GetComponentInChildren<TextMeshPro>().text = characters[i].ToString();
+            objects.Add(lo);
         }
         hero.transform.position = new Vector3(-8f,0f,0f);
         
@@ -167,7 +173,7 @@ public class BridgeLevelManagerController : MonoBehaviour
             , earthLeft.transform.position.y + (GetSpriteHeigth(earthLeft) / 2) - GetSpriteHeigth(middleBridgePartPrefab) / 2
             , 0f), Quaternion.identity);
 
-        bridgeParts.Add(bridgePart);
+        objects.Add(bridgePart);
     }
     
     private float GetSpriteWidth(GameObject gameObject)
@@ -182,32 +188,59 @@ public class BridgeLevelManagerController : MonoBehaviour
     IEnumerator GoToTheWin()
     {
         timer.isActive = false;
+        level++;
         hero.GetComponent<Rigidbody2D>().velocity = new Vector2(5f, 0);
         levelUIController.AddScore(5);
         yield return new WaitForSeconds(4f);
         RecreateGameConditions();
-        
-        //GameObject lo = GameObject.Instantiate(letterObjectPrefab, new Vector3(1,1,0), Quaternion.identity);
-
     }
     IEnumerator GoToTheLose()
     {
         timer.isActive = false;
+        //timer.timeStart = 20;
         hero.GetComponent<Rigidbody2D>().velocity = new Vector2(5f, 0);
         yield return new WaitForSeconds(4f);
-        levelUIController.LoseTheGame();
-        //GameObject lo = GameObject.Instantiate(letterObjectPrefab, new Vector3(1,1,0), Quaternion.identity);
+        if (lost)
+        {
+            levelUIController.LoseTheGame();
+        }
+        else
+        {
+            RecreateGameConditions();
+        }
+        
     }
 
     private void RecreateGameConditions()
     {
-        foreach (GameObject gameObject in bridgeParts)
+        Debug.Log("In this method");
+        foreach (GameObject gameObject in objects)
         {
+            Debug.Log("Destroyed");
             Destroy(gameObject);
         }
+        foreach(LetterController o in FindObjectsOfType<LetterController>())
+            Destroy(o);
         earthLeft.transform.position = instatntEarthLeftPosition;
         earthRight.transform.position = instatntEarthRightPosition;
         hero.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         Init();
+    }
+
+    private float GetTimeForLevel()
+    {
+        switch (level)
+        {
+            case <= 4:
+                return 5;
+            case <= 8:
+                return 15;
+            case <= 15:
+                return 10;
+            case <= 20:
+                return 8;
+            case > 20:
+                return 6;
+        }
     }
 }

@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BridgeLevelManagerController">
+    <Position X="19.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CEwAAAAAAGAKgCgAAQACAEQABwEBEIgEAQACACEQEAA=</HashCode>
+      <FileName>Assets\Scripts\BridgeLevelManagerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BubbleController">
+    <Position X="14.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQwEgIAIACACAAAAAIAAAAAAAEAQAAAAIAggAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\BubbleController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BubbleLevelManagerController">
+    <Position X="12.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQAAEAAACAAAAABQAAIAkAAAIOAAAAAAhAQAAAAAkA=</HashCode>
+      <FileName>Assets\Scripts\BubbleLevelManagerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LetterController">
+    <Position X="11" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAEAAIAAAAAAAEgA=</HashCode>
+      <FileName>Assets\Scripts\LetterController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LevelUIController">
+    <Position X="18" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAACAIAAACAAiAABBBAAABIAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\LevelUIController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainMenuController">
+    <Position X="16.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABIAAAACIAEAAAAIAAAAAAAAAAQAAACAEAAAACAAA=</HashCode>
+      <FileName>Assets\Scripts\MainMenuController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicianController">
+    <Position X="9.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAECABACAgAAAIAAEAAAAAAAAAIAAAAAAAAgA=</HashCode>
+      <FileName>Assets\Scripts\MusicianController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OrchestraLevelManager">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAACQAAAAAAAAIgGCAAAgEAJgAAIACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\OrchestraLevelManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PauseController">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQgAAAAACAIAAAAAAAAAAAAAAAAAAAAAAAAEAgAAAA=</HashCode>
+      <FileName>Assets\Scripts\PauseController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PictureController">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQQAAAAACAAAAAAAABIAAAAAAAAAgAAIAAAABAAAAA=</HashCode>
+      <FileName>Assets\Scripts\PictureController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TimerController">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAgAAAAAAAABAAAAAAAAIAAAAAAAAEAAA=</HashCode>
+      <FileName>Assets\Scripts\TimerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WindowGameLevelManager">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gCRAAAgEECQkCAAAAABAAmAQA8AAEBAAASAAAgACAAA=</HashCode>
+      <FileName>Assets\Scripts\WindowGameLevelManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

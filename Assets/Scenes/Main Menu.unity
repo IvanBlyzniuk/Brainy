@@ -338,7 +338,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 117580098}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 307140335}
+        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
+        m_MethodName: IncreaseVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &117580098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,7 +418,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9be810dbf4076734d9771dc19f83e2c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volume: 0.5
 --- !u!4 &307140336
 Transform:
   m_ObjectHideFlags: 0
@@ -844,7 +855,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1180834856}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 307140335}
+        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
+        m_MethodName: DecreaseVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1180834856
 MonoBehaviour:
   m_ObjectHideFlags: 0

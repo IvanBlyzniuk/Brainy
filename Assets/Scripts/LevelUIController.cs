@@ -37,7 +37,7 @@ public class LevelUIController : MonoBehaviour
     //TODO remind Vania + make end game screen
     public void LoseTheGame()
     {
-        Debug.Log("End");
+        SceneManager.LoadScene("Main Menu");
        
     }
     public int GetLifesCount()
