@@ -8,6 +8,7 @@ public class LevelUIController : MonoBehaviour
 {
    // public ILevelManager levelManager;
     private int lifesCount = 3;
+    private GameOverController gameOverController;
     private int score;
     public Image life1;
     public Image life2;
@@ -15,13 +16,12 @@ public class LevelUIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameOverController = FindObjectOfType<GameOverController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
     
     public void AddScore(int val)
@@ -37,8 +37,7 @@ public class LevelUIController : MonoBehaviour
     //TODO remind Vania + make end game screen
     public void LoseTheGame()
     {
-        SceneManager.LoadScene("Main Menu");
-       
+        gameOverController.EndGame();
     }
     public int GetLifesCount()
     {
