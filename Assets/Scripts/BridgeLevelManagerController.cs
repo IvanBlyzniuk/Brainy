@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class BridgeLevelManagerController : MonoBehaviour
 {
-    private bool isAlive = true;
+    private bool isActive = true;
     private bool lost = false;
     private int dictionaryLength = 0;
     private int curPosition = 0;
@@ -42,9 +42,9 @@ public class BridgeLevelManagerController : MonoBehaviour
     
     void Update()
     {
-        if (timer.GetCurrentTime()<=0 && isAlive)
+        if (timer.GetCurrentTime()<=0 && isActive)
         {
-            isAlive = false;
+            isActive = false;
             levelUIController.MakeMistake();
             if (levelUIController.GetLifesCount() == 0)
                 lost = true;
@@ -69,7 +69,7 @@ public class BridgeLevelManagerController : MonoBehaviour
 
     public bool CheckLetter(char letter)
     {
-        if (isAlive)
+        if (isActive)
         {
             if (selectedWord[curPosition] == letter)
             {
@@ -86,7 +86,7 @@ public class BridgeLevelManagerController : MonoBehaviour
             // Debug.Log(mistakesCount);
             if (levelUIController.GetLifesCount() <= 0)
             {
-                isAlive = false;
+                isActive = false;
                 lost = true;
                 StartCoroutine(GoToTheLose());
             }
@@ -116,7 +116,7 @@ public class BridgeLevelManagerController : MonoBehaviour
     }
     private void Init()
     {
-        isAlive = true;
+        isActive = true;
         timer.isActive = true;
         timer.timeStart = GetTimeForLevel();
         characters = new List<char>();
@@ -188,6 +188,7 @@ public class BridgeLevelManagerController : MonoBehaviour
 
     IEnumerator GoToTheWin()
     {
+        isActive = false;
         timer.isActive = false;
         level++;
         hero.GetComponent<Rigidbody2D>().velocity = new Vector2(5f, 0);
