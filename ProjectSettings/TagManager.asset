@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Backgtound
+    uniqueID: 237188247
+    locked: 0
   - name: WindowGame Background
     uniqueID: 3378646033
     locked: 0
