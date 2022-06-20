@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BridgeGame.unity
     guid: 08dc8601191b78542b5581b2f5e295eb
+  - enabled: 1
+    path: Assets/Scenes/Window Game.unity
+    guid: dd19f923c59d55140901f07078bb8686
   m_configObjects: {}

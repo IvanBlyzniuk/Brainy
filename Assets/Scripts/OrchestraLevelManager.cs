@@ -84,6 +84,7 @@ public class OrchestraLevelManager : MonoBehaviour
                 {
                     yield return new WaitForSeconds(1f);
                     winningMusic.Play();
+                    levelUIController.AddScore(1 + score / 3);
                     score++;
                     Debug.Log(score);
                     if (score % 3 == 0)

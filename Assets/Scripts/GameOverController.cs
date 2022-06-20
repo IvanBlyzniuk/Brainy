@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,9 +8,12 @@ public class GameOverController : MonoBehaviour
 {
     public GameObject gameOverScreen;
     public string sceneName;
+    public TextMeshProUGUI scoreText;
+    private LevelUIController levelUIController;
     // Start is called before the first frame update
     void Start()
     {
+        levelUIController = FindObjectOfType<LevelUIController>();
         
     }
 
@@ -20,6 +24,7 @@ public class GameOverController : MonoBehaviour
     }
     public void EndGame()
     {
+        scoreText.text = "Ваш рахунок:" + levelUIController.score;
         gameOverScreen.SetActive(true);
         Time.timeScale = 0f;
     }

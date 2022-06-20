@@ -678,14 +678,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 367085874, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 483109164, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1795304732}
+    - target: {fileID: 2339732569623866425, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3689529574177041893, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
+      propertyPath: sceneName
+      value: BridgeGame
+      objectReference: {fileID: 0}
     - target: {fileID: 3736849309485196904, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -733,10 +737,6 @@ PrefabInstance:
     - target: {fileID: 3736849309485196906, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
       propertyPath: m_Name
       value: LevelUIManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 3736849309485196906, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b23b6637a5391974baffd8caba96dda7, type: 3}

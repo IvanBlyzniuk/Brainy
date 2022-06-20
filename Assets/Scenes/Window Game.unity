@@ -130,25 +130,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 367085874, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 483109164, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1315703436}
-    - target: {fileID: 1196662115, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1030280271}
-    - target: {fileID: 1196662115, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Pause
-      objectReference: {fileID: 0}
-    - target: {fileID: 3689529574177041893, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
-      propertyPath: sceneName
-      value: Window Game
+    - target: {fileID: 2339732569623866425, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3736849309485196904, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
       propertyPath: m_RootOrder
@@ -446,17 +434,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1030280271 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6014263596186460023, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
-  m_PrefabInstance: {fileID: 136287950}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0012282b95ec81478dfbaee17fea980, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1059063768
 GameObject:
   m_ObjectHideFlags: 0

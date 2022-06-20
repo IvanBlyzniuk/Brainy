@@ -9,7 +9,7 @@ public class LevelUIController : MonoBehaviour
    // public ILevelManager levelManager;
     private int lifesCount = 3;
     private GameOverController gameOverController;
-    private int score;
+    public int score = 0;
     public Image life1;
     public Image life2;
     public Image life3;
