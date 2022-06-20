@@ -12,6 +12,7 @@ public class BridgeLevelManagerController : MonoBehaviour
     private int dictionaryLength = 0;
     private int curPosition = 0;
     private int level = 0;
+    private int scoreToAdd = 1;
     private string path = "Assets/Files/dictionary.txt";
     private string selectedWord;
     private List<char> characters;
@@ -190,14 +191,13 @@ public class BridgeLevelManagerController : MonoBehaviour
         timer.isActive = false;
         level++;
         hero.GetComponent<Rigidbody2D>().velocity = new Vector2(5f, 0);
-        levelUIController.AddScore(5);
+        levelUIController.AddScore(scoreToAdd);
         yield return new WaitForSeconds(4f);
         RecreateGameConditions();
     }
     IEnumerator GoToTheLose()
     {
         timer.isActive = false;
-        //timer.timeStart = 20;
         hero.GetComponent<Rigidbody2D>().velocity = new Vector2(5f, 0);
         yield return new WaitForSeconds(4f);
         if (lost)
@@ -234,12 +234,16 @@ public class BridgeLevelManagerController : MonoBehaviour
             case <= 4:
                 return 5;
             case <= 8:
+                scoreToAdd = 2;
                 return 15;
             case <= 15:
+                scoreToAdd = 3;
                 return 10;
             case <= 20:
+                scoreToAdd = 4;
                 return 8;
             case > 20:
+                scoreToAdd = 5;
                 return 6;
         }
     }

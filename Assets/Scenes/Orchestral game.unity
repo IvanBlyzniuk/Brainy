@@ -1021,10 +1021,18 @@ PrefabInstance:
       propertyPath: m_RenderMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2339732569623866425, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3689529574177041893, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
       propertyPath: sceneName
       value: Orchestral game
       objectReference: {fileID: 0}
+    - target: {fileID: 3689529574177041893, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 1183874251}
     - target: {fileID: 3736849309485196904, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1091,6 +1099,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
+--- !u!114 &1183874251 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1357928293752461294, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
+  m_PrefabInstance: {fileID: 1183874250}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1234012361
 GameObject:
   m_ObjectHideFlags: 0
