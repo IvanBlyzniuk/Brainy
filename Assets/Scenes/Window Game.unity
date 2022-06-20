@@ -250,7 +250,7 @@ MonoBehaviour:
   mainCameraTransform: {fileID: 1315703437}
   promptText: {fileID: 1269516909}
   timerController: {fileID: 1206088744}
-  timeToRemember: 5
+  timeToRemember: 20
 --- !u!4 &526128704
 Transform:
   m_ObjectHideFlags: 0

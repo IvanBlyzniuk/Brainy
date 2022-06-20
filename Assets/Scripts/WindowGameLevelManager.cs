@@ -23,12 +23,14 @@ public class WindowGameLevelManager : MonoBehaviour
     private int[] correctPictureParts;
     private int correctPictureIndex;
     private int score;
+    private bool canClick;
     
     //String array for corresponding messages
-    private string[] skyMsg = new string[]{"sky1", "sky2", "sky3", "sky4" };
-    private string[] buildingMsg = new string[] { "building1", "building2", "building3", "building4" };
-    private string[] groundMsg = new string[] { "ground1", "ground2", "ground3", "ground4" };
-    private string[] objectMsg = new string[] { "object1", "object2", "object3", "object4" };
+    private string[] skyMsg = new string[]{"зустр≥чали ранкове сонце", "були осв≥тлен≥ полуденим сонцем",
+        "купались у останн≥х веч≥рн≥х промен€х", "були осв≥тлен≥ н≥чним с€йвом м≥с€ц€" };
+    private string[] buildingMsg = new string[] { "д≥м", "величний замок", "старий сарай", "намет" };
+    private string[] groundMsg = new string[] { "у л≥с≥", "в горах", "на р≥чц≥", "в пустел≥" };
+    private string[] objectMsg = new string[] { "зелений кущ", "величезний кам≥нь", "фруктове дерево", "старий колод€зь" };
 
     // Start is called before the first frame update
     void Start()
@@ -56,16 +58,20 @@ public class WindowGameLevelManager : MonoBehaviour
 
     private void StartSequence()
     {
+        canClick = true;
         timerController.timeStart = timeToRemember;
         timerController.isActive = true;
         correctPictureParts = new int[4];
         for (int i = 0; i < correctPictureParts.Length; i++)
+        {
             correctPictureParts[i] = UnityEngine.Random.Range(1, 5);
-
+        }
+            
+        
         Debug.Log($"Correct: Sky = {correctPictureParts[0]} Ground = {correctPictureParts[1]} Building = {correctPictureParts[2]} Object = {correctPictureParts[3]}");
 
         mainCameraTransform.position = new Vector3(cameraPos1.position.x, mainCameraTransform.position.y, mainCameraTransform.position.z);
-        promptText.text = $"Correct: Sky = {skyMsg[correctPictureParts[0] - 1]} Ground = {groundMsg[correctPictureParts[1] - 1]} Building = {buildingMsg[correctPictureParts[2] - 1]} Object = {objectMsg[correctPictureParts[3] - 1]}";      
+        promptText.text = $"¬≥кно в≥дкрило мен≥ вид на {buildingMsg[correctPictureParts[2] - 1]} розташований {groundMsg[correctPictureParts[1] - 1]} та {objectMsg[correctPictureParts[3] - 1]}, вони {skyMsg[correctPictureParts[0] - 1]}";      
     }
 
     private void goToImages()
@@ -131,12 +137,19 @@ public class WindowGameLevelManager : MonoBehaviour
 
     public IEnumerator checkPicture(PictureController pictureToCheck)
     {
+        if (!canClick)
+            yield return new WaitForSeconds(0);
         if (pictureToCheck == pictures[0])
         {
+            canClick = false;
+            score++;
             Debug.Log("correct");
             audioSource.Play();
+            if (timeToRemember > 5)
+                timeToRemember--;
             yield return new WaitForSeconds(1);
             StartSequence();
+            
         }
         else
         {
@@ -144,7 +157,8 @@ public class WindowGameLevelManager : MonoBehaviour
             levelUIController.MakeMistake();
             if(levelUIController.GetLifesCount() == 0)
             {
-                Time.timeScale = 0;//TODO: Go to end screen
+                canClick = false;
+                levelUIController.LoseTheGame();//TODO: Go to end screen
             }
         }
     }
