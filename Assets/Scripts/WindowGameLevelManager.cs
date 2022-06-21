@@ -158,6 +158,7 @@ public class WindowGameLevelManager : MonoBehaviour
             if(levelUIController.GetLifesCount() == 0)
             {
                 canClick = false;
+                levelUIController.AddScore(score);
                 levelUIController.LoseTheGame();//TODO: Go to end screen
             }
         }
