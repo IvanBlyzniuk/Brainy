@@ -95,7 +95,6 @@ public class BubbleController : MonoBehaviour
             _bubbleLevelManager.addScore();
         else
             _bubbleLevelManager.loseLife();
-        _burst.Play();
         //GameObject.Destroy(gameObject);
     }
 

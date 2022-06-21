@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3086903123478272362}
   - component: {fileID: 3086903123478272363}
   - component: {fileID: 3086903123478272367}
-  - component: {fileID: 5413631370276990156}
   m_Layer: 0
   m_Name: Bubble
   m_TagString: Untagged
@@ -141,22 +140,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!111 &5413631370276990156
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3086903123478272360}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: f36bf13c439baab41b2541be1451b75d, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: f36bf13c439baab41b2541be1451b75d, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1 &3086903124978107655
 GameObject:
   m_ObjectHideFlags: 0
