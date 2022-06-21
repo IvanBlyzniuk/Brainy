@@ -95,7 +95,8 @@ public class BubbleController : MonoBehaviour
             _bubbleLevelManager.addScore();
         else
             _bubbleLevelManager.loseLife();
-        GameObject.Destroy(gameObject);
+        _burst.Play();
+        //GameObject.Destroy(gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
