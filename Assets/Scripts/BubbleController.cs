@@ -105,7 +105,7 @@ public class BubbleController : MonoBehaviour
                 _bubbleLevelManager.loseLife();
             gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0,0,0);
             _anim.SetBool("isBursted", true);
-           // GameObject.Destroy(gameObject, _anim.GetCurrentAnimatorStateInfo(0).length);
+           
         }
     }
 
