@@ -68,10 +68,10 @@ public class WindowGameLevelManager : MonoBehaviour
         }
             
         
-        Debug.Log($"Correct: Sky = {correctPictureParts[0]} Ground = {correctPictureParts[1]} Building = {correctPictureParts[2]} Object = {correctPictureParts[3]}");
+        //Debug.Log($"Correct: Sky = {correctPictureParts[0]} Ground = {correctPictureParts[1]} Building = {correctPictureParts[2]} Object = {correctPictureParts[3]}");
 
         mainCameraTransform.position = new Vector3(cameraPos1.position.x, mainCameraTransform.position.y, mainCameraTransform.position.z);
-        promptText.text = $"Вікно відкрило мені вид на {buildingMsg[correctPictureParts[2] - 1]} розташований {groundMsg[correctPictureParts[1] - 1]} та {objectMsg[correctPictureParts[3] - 1]}, вони {skyMsg[correctPictureParts[0] - 1]}";      
+        promptText.text = $"Вікно відкрило мені вид на {buildingMsg[correctPictureParts[2] - 1]},\n розташований {groundMsg[correctPictureParts[1] - 1]} та {objectMsg[correctPictureParts[3] - 1]}.\n Вони {skyMsg[correctPictureParts[0] - 1]}.";      
     }
 
     private void goToImages()
@@ -158,6 +158,7 @@ public class WindowGameLevelManager : MonoBehaviour
             if(levelUIController.GetLifesCount() == 0)
             {
                 canClick = false;
+                levelUIController.AddScore(score);
                 levelUIController.LoseTheGame();//TODO: Go to end screen
             }
         }
