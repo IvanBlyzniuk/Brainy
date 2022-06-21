@@ -9,17 +9,18 @@ public class BubbleController : MonoBehaviour
     public float VerticalSpeed;
     public float HorizontalSpeedDelta;
     public float CorrectProbability;
-
     private Rigidbody2D _rigidbody2D;
     private TextMeshPro _textMeshPro;
+    private bool exist;
     private bool correct;
     private Vector2 _targetVelocity;
     private float _delta = 0.01f;
     private BubbleLevelManagerController _bubbleLevelManager;
-
+    private Animator _anim;
     // Start is called before the first frame update
     void Start()
     {
+        exist = true;
         _textMeshPro = GetComponentInChildren<TextMeshPro>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _bubbleLevelManager = GameObject.FindObjectOfType<BubbleLevelManagerController>();
@@ -27,6 +28,7 @@ public class BubbleController : MonoBehaviour
         _rigidbody2D.velocity = new Vector2(0, -VerticalSpeed * _bubbleLevelManager.getSpeedModifier());
         _targetVelocity = new Vector2(HorizontalSpeedDelta * UnityEngine.Random.Range(-1f, 1f), _rigidbody2D.velocity.y);
         _textMeshPro.text = generateEquation(correct);
+        _anim = GetComponent<Animator>();
     }
 
     private string generateEquation(bool correct)
@@ -79,11 +81,14 @@ public class BubbleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Math.Abs(_rigidbody2D.velocity.x - _targetVelocity.x) > _delta)
-            _rigidbody2D.velocity = Vector2.Lerp(_rigidbody2D.velocity, _targetVelocity, 10 * Time.deltaTime);
-        else
+        if (exist)
         {
-            _targetVelocity = new Vector2(HorizontalSpeedDelta * UnityEngine.Random.Range(-1f, 1f), _rigidbody2D.velocity.y);
+            if (Math.Abs(_rigidbody2D.velocity.x - _targetVelocity.x) > _delta)
+                _rigidbody2D.velocity = Vector2.Lerp(_rigidbody2D.velocity, _targetVelocity, 10 * Time.deltaTime);
+            else
+            {
+                _targetVelocity = new Vector2(HorizontalSpeedDelta * UnityEngine.Random.Range(-1f, 1f), _rigidbody2D.velocity.y);
+            }
         }
     }
 
@@ -91,11 +96,17 @@ public class BubbleController : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (correct)
-            _bubbleLevelManager.addScore();
-        else
-            _bubbleLevelManager.loseLife();
-        //GameObject.Destroy(gameObject);
+        if (exist)
+        {
+            exist = false;
+            if (correct)
+                _bubbleLevelManager.addScore();
+            else
+                _bubbleLevelManager.loseLife();
+            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0,0,0);
+            _anim.SetBool("isBursted", true);
+           // GameObject.Destroy(gameObject, _anim.GetCurrentAnimatorStateInfo(0).length);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
