@@ -32,6 +32,7 @@ public class BubbleLevelManagerController : MonoBehaviour
         levelUIController = GameObject.FindObjectOfType<LevelUIController>();
         timeTillSpawnLeft = 0;
         livesLeft = lives;
+        GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("Volume");
     }
 
     // Update is called once per frame
