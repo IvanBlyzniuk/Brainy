@@ -29,7 +29,6 @@ public class GameOverController : MonoBehaviour
     }
     public void EndGame()
     {
-        scoreText.text = "Ваш рахунок:";
         scoreCount.text = levelUIController.GetScore().ToString();
         gameOverScreen.SetActive(true);
         Time.timeScale = 0f;

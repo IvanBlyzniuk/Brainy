@@ -612,31 +612,6 @@ Transform:
   m_Father: {fileID: 229909310}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1684031810 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3736849309485196906, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
-  m_PrefabInstance: {fileID: 2086702296}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1684031813
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1684031810}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1917064325
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,38 +770,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 252233456, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -0.67993164
-      objectReference: {fileID: 0}
-    - target: {fileID: 252233456, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -6.7700195
-      objectReference: {fileID: 0}
-    - target: {fileID: 367085875, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.0010986328
-      objectReference: {fileID: 0}
     - target: {fileID: 483109164, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1481508029}
-    - target: {fileID: 7644511786265702, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416947908406919122, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2339732569623866425, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3689529574177041893, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
-      propertyPath: sceneName
-      value: Bubble game
-      objectReference: {fileID: 0}
     - target: {fileID: 3736849309485196904, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -874,14 +821,6 @@ PrefabInstance:
     - target: {fileID: 3736849309485196906, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
       propertyPath: m_Name
       value: LevelUIManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 4539469369145558251, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4704300883053276695, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -20.780579
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b23b6637a5391974baffd8caba96dda7, type: 3}

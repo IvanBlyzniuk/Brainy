@@ -67,7 +67,11 @@ public class BubbleLevelManagerController : MonoBehaviour
         livesLeft--;
         levelUIController.MakeMistake();
         if (livesLeft == 0)
-            levelUIController.LoseTheGame(); //TODO: change to lose
+        {
+            SavesManager.getInstance().saveBubbleGameScore(score);
+            levelUIController.AddScore(score);
+            levelUIController.LoseTheGame();
+        }
     }
 
     public float getSpeedModifier()
