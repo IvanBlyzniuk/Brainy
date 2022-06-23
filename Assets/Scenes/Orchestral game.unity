@@ -1081,6 +1081,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelUIManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4704300883053276695, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -20.780457
+      objectReference: {fileID: 0}
     - target: {fileID: 8509549844935386283, guid: b23b6637a5391974baffd8caba96dda7, type: 3}
       propertyPath: m_SizeDelta.x
       value: -1446.76
@@ -1769,7 +1773,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 237188247
   m_SortingLayer: -2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 4000e242b7854ef47a1d282fbdfed0e5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
