@@ -6,7 +6,7 @@ using UnityEngine;
 public class SavesManager
 {
     private static SavesManager instance;
-    private static readonly string BaseFolder = Path.Combine("Saves");
+    private static readonly string BaseFolder = "Saves";
 
     private Dictionary<string, int> bubbleGameScores;
     private Dictionary<string, int> bridgeGameScores;
@@ -16,42 +16,43 @@ public class SavesManager
     private SavesManager()
     {
         if (!Directory.Exists(BaseFolder))
-        {
             Directory.CreateDirectory(BaseFolder);
-            bubbleGameScores = new Dictionary<string, int> ();
-            bridgeGameScores = new Dictionary<string, int>();
-            windowGameScores = new Dictionary<string, int>();
-            orchestraGameScores = new Dictionary<string, int>();
-        }
-        else
-        {
-            bubbleGameScores = deserialize(Path.Combine(BaseFolder, "bubleGameScores.dat"));
-            bridgeGameScores = deserialize(Path.Combine(BaseFolder, "bridgeGameScores.dat"));
-            windowGameScores = deserialize(Path.Combine(BaseFolder, "windowGameScores.dat"));
-            orchestraGameScores = deserialize((Path.Combine(BaseFolder, "orchestraGameScores.dat")));
-        }
-        if (bubbleGameScores.Keys.Count > 0)
-            Debug.Log(PlayerPrefs.GetString("currentUserName") + " " + bubbleGameScores[PlayerPrefs.GetString("currentUserName")]);
+
+        bubbleGameScores = deserialize("bubbleGameScores.dat");
+        bridgeGameScores = deserialize("bridgeGameScores.dat");
+        windowGameScores = deserialize("windowGameScores.dat");
+        orchestraGameScores = deserialize("orchestraGameScores.dat");
     }
 
     private Dictionary<string, int> deserialize(string name)
     {
-        string stringObj;
         string filepath = Path.Combine(BaseFolder, name);
+        Dictionary<string, int> dict = new Dictionary<string,int>();
+        if(!File.Exists(filepath))
+            return dict;
         using (var sr = new StreamReader(filepath))
         {
-            stringObj = sr.ReadToEnd();
+            string line1,line2;
+            while(!sr.EndOfStream)
+            {
+                line1 = sr.ReadLine();
+                line2 = sr.ReadLine();
+                dict.Add(line1, int.Parse(line2));
+            }
         }
 
-        return JsonUtility.FromJson<Dictionary<string, int>>(stringObj);
+        return dict;
     }
 
     private void serialize(Dictionary<string, int> data, string name)
     {
-        string stringObj = JsonUtility.ToJson(data);
         using (var sw = new StreamWriter(Path.Combine(BaseFolder, name), false))
         {
-            sw.Write(stringObj);
+            foreach(KeyValuePair<string, int> kvp in data)
+            {
+                sw.WriteLine(kvp.Key);
+                sw.WriteLine(kvp.Value);
+            }
         }
     }
 
@@ -73,6 +74,7 @@ public class SavesManager
         int oldScore = bubbleGameScores[username];
         if (score > oldScore)
             bubbleGameScores[username] = score;
+        serialize(bubbleGameScores, "bubbleGameScores.dat");
     }
 
 
@@ -88,6 +90,7 @@ public class SavesManager
         int oldScore = bridgeGameScores[username];
         if (score > oldScore)
             bridgeGameScores[username] = score;
+        serialize(bridgeGameScores, "bridgeGameScores.dat");
     }
 
     public void saveWindowGameScore(int score)
@@ -101,6 +104,7 @@ public class SavesManager
         int oldScore = windowGameScores[username];
         if (score > oldScore)
             windowGameScores[username] = score;
+        serialize(windowGameScores, "windowGameScores.dat");
     }
 
     public void saveOrchestraGameScore(int score)
@@ -114,13 +118,6 @@ public class SavesManager
         int oldScore = orchestraGameScores[username];
         if (score > oldScore)
             orchestraGameScores[username] = score;
-    }
-
-    ~SavesManager()
-    {
-        serialize(bubbleGameScores, "bubbleGameScores.dat");
-        serialize(bridgeGameScores, "bridgeGameScores.dat");
-        serialize(windowGameScores, "windowGameScores.dat");
         serialize(orchestraGameScores, "orchestraGameScores.dat");
     }
 }

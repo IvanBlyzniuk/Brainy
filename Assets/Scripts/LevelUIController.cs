@@ -10,6 +10,7 @@ public class LevelUIController : MonoBehaviour
     private int lifesCount = 3;
     private GameOverController gameOverController;
     private int score = 0;
+    private AudioSource loseLifeSound;
     [SerializeField]
     private Image life1;
     [SerializeField]
@@ -20,6 +21,8 @@ public class LevelUIController : MonoBehaviour
     void Start()
     {
         gameOverController = FindObjectOfType<GameOverController>();
+        loseLifeSound = GetComponent<AudioSource>();
+        loseLifeSound.volume = PlayerPrefs.GetFloat("Volume");
     }
 
     // Update is called once per frame
@@ -34,6 +37,7 @@ public class LevelUIController : MonoBehaviour
 
     public void MakeMistake()
     {
+        loseLifeSound.Play();
         lifesCount--;
         UpdateLifeMeter();
     }

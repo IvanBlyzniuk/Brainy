@@ -101,15 +101,16 @@ public class BubbleController : MonoBehaviour
     {
         if (exist)
         {
-            _bubbleLevelManager.GetComponent<AudioSource>().Play();
             exist = false;
             if (correct)
+            {
+                _bubbleLevelManager.GetComponent<AudioSource>().Play();
                 _bubbleLevelManager.addScore();
+            }  
             else
                 _bubbleLevelManager.loseLife();
             gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0,0,0);
             _anim.SetBool("isBursted", true);
-           
         }
     }
 
