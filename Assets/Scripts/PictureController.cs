@@ -43,7 +43,7 @@ public class PictureController : MonoBehaviour
 
     private void OnMouseDown()
     {
-        borderSprite = borderSelectedSprite;
+        //borderSprite = borderSelectedSprite;
         StartCoroutine(levelManager.checkPicture(this));
     }
 

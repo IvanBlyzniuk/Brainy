@@ -147,29 +147,31 @@ public class WindowGameLevelManager : MonoBehaviour
 
     public IEnumerator checkPicture(PictureController pictureToCheck)
     {
-        if (!canClick)
-            yield return new WaitForSeconds(0);
-        if (pictureToCheck == pictures[0])
+
+        if(canClick)
         {
-            canClick = false;
-            score++;
-            Debug.Log("correct");
-            audioSource.Play();
-            if (timeToRemember > 5)
-                timeToRemember--;
-            yield return new WaitForSeconds(1);
-            StartSequence();
-            
-        }
-        else
-        {
-            Debug.Log("incorrect");
-            levelUIController.MakeMistake();
-            if(levelUIController.GetLifesCount() == 0)
+            if (pictureToCheck == pictures[0])
             {
                 canClick = false;
-                levelUIController.AddScore(score);
-                levelUIController.LoseTheGame();//TODO: Go to end screen
+                score++;
+                Debug.Log("correct");
+                audioSource.Play();
+                if (timeToRemember > 5)
+                    timeToRemember--;
+                yield return new WaitForSeconds(1);
+                StartSequence();
+
+            }
+            else
+            {
+                Debug.Log("incorrect");
+                levelUIController.MakeMistake();
+                if (levelUIController.GetLifesCount() == 0)
+                {
+                    canClick = false;
+                    levelUIController.AddScore(score);
+                    levelUIController.LoseTheGame();
+                }
             }
         }
     }
