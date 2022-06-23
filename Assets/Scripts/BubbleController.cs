@@ -6,9 +6,12 @@ using System;
 
 public class BubbleController : MonoBehaviour
 {
-    public float VerticalSpeed;
-    public float HorizontalSpeedDelta;
-    public float CorrectProbability;
+    [SerializeField]
+    private float VerticalSpeed;
+    [SerializeField]
+    private float HorizontalSpeedDelta;
+    [SerializeField]
+    private float CorrectProbability;
     private Rigidbody2D _rigidbody2D;
     private TextMeshPro _textMeshPro;
     private bool exist;

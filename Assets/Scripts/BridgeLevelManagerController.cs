@@ -20,14 +20,22 @@ public class BridgeLevelManagerController : MonoBehaviour
     private Vector3 instatntEarthLeftPosition;
     private Vector3 instatntEarthRightPosition;
     private LevelUIController levelUIController;
-    public GameObject earthLeft;
-    public GameObject earthRight;
-    public GameObject letterObjectPrefab;
-    public GameObject middleBridgePartPrefab;
-    public GameObject leftBridgePartPrefab;
-    public GameObject rightBridgePartPrefab;
-    public GameObject hero;
-    public TimerController timer;
+    [SerializeField]
+    private GameObject earthLeft;
+    [SerializeField]
+    private GameObject earthRight;
+    [SerializeField]
+    private GameObject letterObjectPrefab;
+    [SerializeField]
+    private GameObject middleBridgePartPrefab;
+    [SerializeField]
+    private GameObject leftBridgePartPrefab;
+    [SerializeField]
+    private GameObject rightBridgePartPrefab;
+    [SerializeField]
+    private GameObject hero;
+    [SerializeField]
+    private TimerController timer;
    
     
     void Start()
@@ -117,8 +125,8 @@ public class BridgeLevelManagerController : MonoBehaviour
     private void Init()
     {
         isActive = true;
-        timer.isActive = true;
-        timer.timeStart = GetTimeForLevel();
+        timer.IsActive = true;
+        timer.TimeStart = GetTimeForLevel();
         characters = new List<char>();
         Debug.Log("Created array");
         objects = new List<GameObject>();
@@ -143,7 +151,7 @@ public class BridgeLevelManagerController : MonoBehaviour
         {
             GameObject lo = GameObject.Instantiate(letterObjectPrefab, new Vector3(0 - (float)(GetSpriteWidth(letterObjectPrefab) * selectedWord.Length /2)  + GetSpriteWidth(letterObjectPrefab) / 2 + i * GetSpriteWidth(letterObjectPrefab)
                 , 3f, 0f), Quaternion.identity);
-            lo.GetComponent<LetterController>().letter = characters[i];
+            lo.GetComponent<LetterController>().Letter = characters[i];
             lo.GetComponentInChildren<TextMeshPro>().text = characters[i].ToString();
             objects.Add(lo);
         }
@@ -189,7 +197,7 @@ public class BridgeLevelManagerController : MonoBehaviour
     IEnumerator GoToTheWin()
     {
         isActive = false;
-        timer.isActive = false;
+        timer.IsActive = false;
         level++;
         hero.GetComponent<Rigidbody2D>().velocity = new Vector2(5f, 0);
         levelUIController.AddScore(scoreToAdd);
@@ -198,7 +206,7 @@ public class BridgeLevelManagerController : MonoBehaviour
     }
     IEnumerator GoToTheLose()
     {
-        timer.isActive = false;
+        timer.IsActive = false;
         hero.GetComponent<Rigidbody2D>().velocity = new Vector2(5f, 0);
         yield return new WaitForSeconds(4f);
         if (lost)

@@ -4,24 +4,33 @@ using UnityEngine;
 
 public class OrchestraLevelManager : MonoBehaviour
 {
-
-    public int sequenceLength;
+    [SerializeField]
+    private int sequenceLength;
     private int score = 0;
     private int curPosition = 0;
     private List<int> inputs;
     private List<MusicianController> controllers;
-    public GameObject musician1;
-    public GameObject musician2;
-    public GameObject musician3;
-    public GameObject musician4;
+    [SerializeField]
+    private GameObject musician1;
+    [SerializeField]
+    private GameObject musician2;
+    [SerializeField]
+    private GameObject musician3;
+    [SerializeField]
+    private GameObject musician4;
     private MusicianController musician1Controller;
     private MusicianController musician2Controller;
     private MusicianController musician3Controller;
     private MusicianController musician4Controller;
     private LevelUIController levelUIController;
-    public bool isScreenActive = true;
-    public bool isPlayingMusicSequence = false;
-    public AudioSource winningMusic;
+    private bool isScreenActive = true;
+    private bool isPlayingMusicSequence = false;
+    [SerializeField]
+    private AudioSource winningMusic;
+
+    public bool IsScreenActive { get => isScreenActive; set => isScreenActive = value; }
+    public bool IsPlayingMusicSequence { get => isPlayingMusicSequence; set => isPlayingMusicSequence = value; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,7 +64,7 @@ public class OrchestraLevelManager : MonoBehaviour
             int input = Random.Range(0,4);
             inputs.Add(input);
         }
-        isPlayingMusicSequence = true;
+        IsPlayingMusicSequence = true;
         StartCoroutine(PlayMusicSequence());
     }
 
@@ -66,13 +75,13 @@ public class OrchestraLevelManager : MonoBehaviour
             StartCoroutine(controllers[inputs[i]].PlayMusic());
             yield return new WaitForSeconds(1f);
         }
-        isScreenActive = true;
-        isPlayingMusicSequence = false;
+        IsScreenActive = true;
+        IsPlayingMusicSequence = false;
     }
 
     public IEnumerator CheckChoosenMusician(int number)
     {
-        if (isScreenActive && !isPlayingMusicSequence)
+        if (IsScreenActive && !IsPlayingMusicSequence)
         {
             
             if (inputs[curPosition] == number)
@@ -92,7 +101,7 @@ public class OrchestraLevelManager : MonoBehaviour
                         sequenceLength++;
                     }
                     curPosition = 0;
-                    isScreenActive = false;
+                    IsScreenActive = false;
                     yield return new WaitForSeconds(1.8f);
                     Init();
                 }

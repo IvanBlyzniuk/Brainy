@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class BubbleLevelManagerController : MonoBehaviour
 {
-    public GameObject leftSpawningBound;
-    public GameObject rightSpawningBound;
-    public GameObject bubble;
-    public float timeBetweenSpawns;
+    [SerializeField]
+    private GameObject leftSpawningBound;
+    [SerializeField]
+    private GameObject rightSpawningBound;
+    [SerializeField]
+    private GameObject bubble;
+    [SerializeField]
+    private float timeBetweenSpawns;
 
     private float timeTillSpawnLeft;
     private float _spawnLB;

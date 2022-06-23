@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class PictureController : MonoBehaviour
 {
-    public SpriteRenderer sky;
-    public SpriteRenderer ground;
-    public SpriteRenderer building;
-    public SpriteRenderer theObject;
-    public SpriteRenderer border;
+    [SerializeField]
+    private SpriteRenderer sky;
+    [SerializeField]
+    private SpriteRenderer ground;
+    [SerializeField]
+    private SpriteRenderer building;
+    [SerializeField]
+    private SpriteRenderer theObject;
+    [SerializeField]
+    private SpriteRenderer border;
 
     private WindowGameLevelManager levelManager;
     private Sprite borderSprite;

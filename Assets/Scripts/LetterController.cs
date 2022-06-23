@@ -5,8 +5,12 @@ using UnityEngine;
 public class LetterController : MonoBehaviour
 {
     private BridgeLevelManagerController bridgeLevelManagerController ;
-    public char letter;
-    public int id;
+    private char letter;
+    private int id;
+
+    public int Id { get => id; set => id = value; }
+    public char Letter { get => letter; set => letter = value; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +25,7 @@ public class LetterController : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (bridgeLevelManagerController.CheckLetter(letter))
+        if (bridgeLevelManagerController.CheckLetter(Letter))
         {
             GameObject.Destroy(gameObject);
         }

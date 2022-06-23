@@ -6,16 +6,26 @@ using UnityEngine;
 
 public class WindowGameLevelManager : MonoBehaviour
 {
-    public PictureController picture1;
-    public PictureController picture2;
-    public PictureController picture3;
-    public PictureController picture4;
-    public Transform cameraPos1;
-    public Transform cameraPos2;
-    public Transform mainCameraTransform;
-    public TextMeshPro promptText;
-    public TimerController timerController;
-    public int timeToRemember;
+    [SerializeField]
+    private PictureController picture1;
+    [SerializeField]
+    private PictureController picture2;
+    [SerializeField]
+    private PictureController picture3;
+    [SerializeField]
+    private PictureController picture4;
+    [SerializeField]
+    private Transform cameraPos1;
+    [SerializeField]
+    private Transform cameraPos2;
+    [SerializeField]
+    private Transform mainCameraTransform;
+    [SerializeField]
+    private TextMeshPro promptText;
+    [SerializeField]
+    private TimerController timerController;
+    [SerializeField]
+    private int timeToRemember;
 
     private AudioSource audioSource;
     private LevelUIController levelUIController;
@@ -49,9 +59,9 @@ public class WindowGameLevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(timerController.isActive && timerController.GetCurrentTime() <= 0)
+        if(timerController.IsActive && timerController.GetCurrentTime() <= 0)
         {
-            timerController.isActive = false;
+            timerController.IsActive = false;
             goToImages();
         }
     }
@@ -59,8 +69,8 @@ public class WindowGameLevelManager : MonoBehaviour
     private void StartSequence()
     {
         canClick = true;
-        timerController.timeStart = timeToRemember;
-        timerController.isActive = true;
+        timerController.TimeStart = timeToRemember;
+        timerController.IsActive = true;
         correctPictureParts = new int[4];
         for (int i = 0; i < correctPictureParts.Length; i++)
         {

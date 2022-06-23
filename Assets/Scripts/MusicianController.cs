@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class MusicianController : MonoBehaviour
 {
-    public Sprite silent;
-    public Sprite playingMusic;
-    public AudioSource music;
+    [SerializeField]
+    private Sprite silent;
+    [SerializeField]
+    private Sprite playingMusic;
+    [SerializeField]
+    private AudioSource music;
     public int id;
     private OrchestraLevelManager levelManager;
     private SpriteRenderer spriteRenderer;
@@ -21,12 +24,12 @@ public class MusicianController : MonoBehaviour
 
     public IEnumerator PlayMusic()
     {
-        levelManager.isScreenActive = false;
+        levelManager.IsScreenActive = false;
         spriteRenderer.sprite = playingMusic;
         music.Play();
         yield return new WaitForSeconds(0.5f);
         spriteRenderer.sprite = silent;
-        levelManager.isScreenActive = true;
+        levelManager.IsScreenActive = true;
     }
 
     private void OnMouseDown()

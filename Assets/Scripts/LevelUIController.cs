@@ -9,10 +9,13 @@ public class LevelUIController : MonoBehaviour
    // public ILevelManager levelManager;
     private int lifesCount = 3;
     private GameOverController gameOverController;
-    public int score = 0;
-    public Image life1;
-    public Image life2;
-    public Image life3;
+    private int score = 0;
+    [SerializeField]
+    private Image life1;
+    [SerializeField]
+    private Image life2;
+    [SerializeField]
+    private Image life3;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,5 +60,9 @@ public class LevelUIController : MonoBehaviour
         {
             Destroy(life3);
         }
+    }
+    public int GetScore()
+    {
+        return score;
     }
 }
