@@ -101,6 +101,7 @@ public class BubbleController : MonoBehaviour
     {
         if (exist)
         {
+            _bubbleLevelManager.GetComponent<AudioSource>().Play();
             exist = false;
             if (correct)
                 _bubbleLevelManager.addScore();
