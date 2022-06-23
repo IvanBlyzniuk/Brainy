@@ -12,6 +12,8 @@ public class GameOverController : MonoBehaviour
     private string sceneName;
     [SerializeField]
     private TextMeshProUGUI scoreText;
+    [SerializeField]
+    private TextMeshProUGUI scoreCount;
     private LevelUIController levelUIController;
     // Start is called before the first frame update
     void Start()
@@ -27,7 +29,8 @@ public class GameOverController : MonoBehaviour
     }
     public void EndGame()
     {
-        scoreText.text = "Ваш рахунок:" + levelUIController.GetScore();
+        scoreText.text = "Ваш рахунок:";
+        scoreCount.text = levelUIController.GetScore().ToString();
         gameOverScreen.SetActive(true);
         Time.timeScale = 0f;
     }
