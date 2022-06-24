@@ -39,7 +39,23 @@ public class PauseController : MonoBehaviour
 
     public void GoToMainMenu()
     {
+        LevelUIController levelUIController = FindObjectOfType<LevelUIController>();
         Time.timeScale = 1f;
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Bubble game":
+                SavesManager.getInstance().saveBubbleGameScore(levelUIController.GetScore()) ;
+                break;
+            case "BridgeGame":
+                SavesManager.getInstance().saveBridgeGameScore(levelUIController.GetScore());
+                break;
+            case "Orchestral game":
+                SavesManager.getInstance().saveOrchestraGameScore(levelUIController.GetScore());
+                break;
+            case "Window Game":
+                SavesManager.getInstance().saveWindowGameScore(levelUIController.GetScore());
+                break;
+        }
         SceneManager.LoadScene("Main Menu");
     }
     public void VolumeUp()

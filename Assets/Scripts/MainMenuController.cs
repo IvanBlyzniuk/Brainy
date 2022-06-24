@@ -44,6 +44,10 @@ public class MainMenuController : MonoBehaviour
         SceneManager.LoadScene("Orchestral game");
         
     }
+    public void GoToScoreScreen()
+    {
+        SceneManager.LoadScene("Score Menu");
+    }
 
     public void ExitGame()
     {

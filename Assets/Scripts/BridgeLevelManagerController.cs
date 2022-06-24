@@ -82,7 +82,7 @@ public class BridgeLevelManagerController : MonoBehaviour
 
     public bool CheckLetter(char letter)
     {
-        if (isActive)
+        if (isActive && Time.deltaTime > 0)
         {
             if (selectedWord[curPosition] == letter)
             {
