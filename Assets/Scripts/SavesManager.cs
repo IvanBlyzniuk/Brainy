@@ -120,4 +120,63 @@ public class SavesManager
             orchestraGameScores[username] = score;
         serialize(orchestraGameScores, "orchestraGameScores.dat");
     }
+
+    private int getScore(Dictionary<string,int> scores)
+    {
+        string username = PlayerPrefs.GetString("currentUserName");
+        if (!scores.ContainsKey(username))
+            return 0;
+        return scores[username];
+    }
+
+    public int getBubbleGameScore()
+    {
+        return getScore(bubbleGameScores);
+    }
+
+    public int getBridgeGameScore()
+    {
+        return getScore(bridgeGameScores);
+    }
+
+    public int getWindowGameScore()
+    {
+        return getScore(windowGameScores);
+    }
+
+    public int getOrchestraGameScore()
+    {
+        return getScore(orchestraGameScores);
+    }
+
+    private KeyValuePair<string, int> getMaxScore(Dictionary<string, int> scores)
+    {
+        KeyValuePair<string, int> res = new KeyValuePair<string, int>("------",0);
+        foreach(KeyValuePair<string,int> pair in scores)
+        {
+            if (pair.Value > res.Value)
+                res = pair;
+        }
+        return res;
+    }
+
+    public KeyValuePair<string,int> getBubbleGameMaxScore()
+    {
+        return getMaxScore(bubbleGameScores);
+    }
+
+    public KeyValuePair<string, int> getBridgeGameMaxScore()
+    {
+        return getMaxScore(bridgeGameScores);
+    }
+
+    public KeyValuePair<string, int> getWindowGameMaxScore()
+    {
+        return getMaxScore(windowGameScores);
+    }
+
+    public KeyValuePair<string, int> getOrchestraGameMaxScore()
+    {
+        return getMaxScore(orchestraGameScores);
+    }
 }
