@@ -17,6 +17,7 @@ public class BridgeLevelManagerController : MonoBehaviour
     private string selectedWord;
     private List<char> characters;
     private List<GameObject> objects;
+    private List<GameObject> bridgeParts;
     private Vector3 instatntEarthLeftPosition;
     private Vector3 instatntEarthRightPosition;
     private LevelUIController levelUIController;
@@ -36,14 +37,18 @@ public class BridgeLevelManagerController : MonoBehaviour
     private GameObject hero;
     [SerializeField]
     private TimerController timer;
-   
-    
+    private Animator anim;
+    private AudioSource winSound;
+
+
     void Start()
     {
         timer = FindObjectOfType<TimerController>();
         levelUIController = FindObjectOfType<LevelUIController>();
         instatntEarthLeftPosition = earthLeft.transform.position;
         instatntEarthRightPosition = earthRight.transform.position;
+        anim = hero.GetComponent<Animator>();
+        winSound = GetComponent<AudioSource>();
         Init();
     }
 
@@ -85,13 +90,12 @@ public class BridgeLevelManagerController : MonoBehaviour
                 curPosition++;
                 if (curPosition == selectedWord.Length)
                 {
+                    winSound.Play();
                     StartCoroutine(GoToTheWin());
                 }
                 return true;
             }
-            // MakeMistake();
             levelUIController.MakeMistake();
-            // Debug.Log(mistakesCount);
             if (levelUIController.GetLifesCount() <= 0)
             {
                 isActive = false;
@@ -130,6 +134,7 @@ public class BridgeLevelManagerController : MonoBehaviour
         characters = new List<char>();
         Debug.Log("Created array");
         objects = new List<GameObject>();
+        bridgeParts = new List<GameObject>();
         curPosition = 0;
         dictionaryLength = 0;
         StreamReader reader = new StreamReader(path);
@@ -144,12 +149,11 @@ public class BridgeLevelManagerController : MonoBehaviour
             characters.Add(selectedWord[i]);
         }
         Shuffle(characters);
-        earthLeft.transform.position = new Vector3(earthLeft.transform.position.x - (GetSpriteWidth(middleBridgePartPrefab) * selectedWord.Length / 2), earthLeft.transform.position.y, earthLeft.transform.position.z);
-        earthRight.transform.position = new Vector3(earthRight.transform.position.x + (GetSpriteWidth(middleBridgePartPrefab) * selectedWord.Length / 2), earthRight.transform.position.y, earthRight.transform.position.z);
-
+        earthLeft.transform.position = new Vector3(earthLeft.transform.position.x - (GetSpriteWidth(middleBridgePartPrefab) * (selectedWord.Length-2) / 2)  - GetSpriteWidth(leftBridgePartPrefab) +1f, earthLeft.transform.position.y, earthLeft.transform.position.z);
+        earthRight.transform.position = new Vector3(earthRight.transform.position.x + (GetSpriteWidth(middleBridgePartPrefab) * selectedWord.Length / 2)-1f, earthRight.transform.position.y, earthRight.transform.position.z);
         for (int i = 0; i < selectedWord.Length; i++)
         {
-            GameObject lo = GameObject.Instantiate(letterObjectPrefab, new Vector3(0 - (float)(GetSpriteWidth(letterObjectPrefab) * selectedWord.Length /2)  + GetSpriteWidth(letterObjectPrefab) / 2 + i * GetSpriteWidth(letterObjectPrefab)
+            GameObject lo = GameObject.Instantiate(letterObjectPrefab, new Vector3(0 + i * (GetSpriteWidth(letterObjectPrefab)+0.1f) - ((float)(GetSpriteWidth(letterObjectPrefab) + 0.1) * selectedWord.Length / 2) + GetSpriteWidth(letterObjectPrefab) / 2
                 , 3f, 0f), Quaternion.identity);
             lo.GetComponent<LetterController>().Letter = characters[i];
             lo.GetComponentInChildren<TextMeshPro>().text = characters[i].ToString();
@@ -164,25 +168,20 @@ public class BridgeLevelManagerController : MonoBehaviour
         GameObject bridgePart;
         if (curPosition == 0)
         {
-            bridgePart = GameObject.Instantiate(leftBridgePartPrefab, new Vector3(earthLeft.transform.position.x + (GetSpriteWidth(earthLeft) / 2) + curPosition * GetSpriteWidth(leftBridgePartPrefab) +
-            GetSpriteWidth(leftBridgePartPrefab) / 2
-            , earthLeft.transform.position.y + (GetSpriteHeigth(earthLeft) / 2) - GetSpriteHeigth(leftBridgePartPrefab) / 2
-            , 0f), Quaternion.identity);
+            bridgePart = GameObject.Instantiate(leftBridgePartPrefab, new Vector3(earthLeft.transform.position.x - 0.5f  + GetSpriteWidth(earthLeft)/2  + GetSpriteWidth(leftBridgePartPrefab)/2 ,
+                earthLeft.transform.position.y + GetSpriteHeigth(earthLeft) / 2 + GetSpriteHeigth(leftBridgePartPrefab) / 2 - 0.1f,
+                0),Quaternion.identity); 
         }
         else if (curPosition == selectedWord.Length-1)
         {
-            bridgePart = GameObject.Instantiate(rightBridgePartPrefab, new Vector3(earthLeft.transform.position.x + (GetSpriteWidth(earthLeft) / 2) + curPosition * GetSpriteWidth(rightBridgePartPrefab) +
-            GetSpriteWidth(rightBridgePartPrefab) / 2
-            , earthLeft.transform.position.y + (GetSpriteHeigth(earthLeft) / 2) - GetSpriteHeigth(rightBridgePartPrefab) / 2
-            , 0f), Quaternion.identity);
+            bridgePart = GameObject.Instantiate(rightBridgePartPrefab, new Vector3(bridgeParts[curPosition - 1].transform.position.x + GetSpriteWidth(bridgeParts[curPosition - 1]) / 2 + GetSpriteWidth(rightBridgePartPrefab) / 2 - 0.1f,
+                bridgeParts[curPosition - 1].transform.position.y, 0), Quaternion.identity);
         }
         else
-            bridgePart = GameObject.Instantiate(middleBridgePartPrefab, new Vector3(earthLeft.transform.position.x + (GetSpriteWidth(earthLeft) / 2) + curPosition * GetSpriteWidth(middleBridgePartPrefab) +
-            GetSpriteWidth(middleBridgePartPrefab) / 2
-            , earthLeft.transform.position.y + (GetSpriteHeigth(earthLeft) / 2) - GetSpriteHeigth(middleBridgePartPrefab) / 2
-            , 0f), Quaternion.identity);
+            bridgePart = GameObject.Instantiate(middleBridgePartPrefab, new Vector3(bridgeParts[curPosition - 1].transform.position.x + GetSpriteWidth(bridgeParts[curPosition - 1])/2 + GetSpriteWidth(middleBridgePartPrefab) / 2 - 0.1f,
+                bridgeParts[curPosition - 1].transform.position.y, 0), Quaternion.identity);
 
-        objects.Add(bridgePart);
+        bridgeParts.Add(bridgePart);
     }
     
     private float GetSpriteWidth(GameObject gameObject)
@@ -200,6 +199,7 @@ public class BridgeLevelManagerController : MonoBehaviour
         timer.IsActive = false;
         level++;
         hero.GetComponent<Rigidbody2D>().velocity = new Vector2(5f, 0);
+        anim.SetFloat("Speed", hero.GetComponent<Rigidbody2D>().velocity.x);
         levelUIController.AddScore(scoreToAdd);
         yield return new WaitForSeconds(4f);
         RecreateGameConditions();
@@ -222,17 +222,15 @@ public class BridgeLevelManagerController : MonoBehaviour
 
     private void RecreateGameConditions()
     {
-        Debug.Log("In this method");
         foreach (GameObject gameObject in objects)
-        {
-            Debug.Log("Destroyed");
             Destroy(gameObject);
-        }
-        foreach(LetterController o in FindObjectsOfType<LetterController>())
-            Destroy(o);
+        
+        foreach (GameObject gameObject in bridgeParts)
+            Destroy(gameObject);
         earthLeft.transform.position = instatntEarthLeftPosition;
         earthRight.transform.position = instatntEarthRightPosition;
         hero.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        anim.SetFloat("Speed", hero.GetComponent<Rigidbody2D>().velocity.x);
         Init();
     }
 
@@ -241,7 +239,7 @@ public class BridgeLevelManagerController : MonoBehaviour
         switch (level)
         {
             case <= 4:
-                return 5;
+                return 20;
             case <= 8:
                 scoreToAdd = 2;
                 return 15;
