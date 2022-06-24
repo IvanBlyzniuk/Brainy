@@ -81,7 +81,7 @@ public class OrchestraLevelManager : MonoBehaviour
 
     public IEnumerator CheckChoosenMusician(int number)
     {
-        if (IsScreenActive && !IsPlayingMusicSequence)
+        if (IsScreenActive && !IsPlayingMusicSequence && Time.deltaTime > 0)
         {
             
             if (inputs[curPosition] == number)

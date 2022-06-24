@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class LoginController : MonoBehaviour
 {
-    private string name;
+    private string userName;
     [SerializeField]
     private TMP_InputField inputField;
     // Start is called before the first frame update
@@ -29,9 +29,9 @@ public class LoginController : MonoBehaviour
     {
         if (!string.IsNullOrWhiteSpace(inputField.text))
         {
-            name = inputField.text;
-            Debug.Log(name);
-            PlayerPrefs.SetString("currentUserName", name);
+            userName = inputField.text;
+            Debug.Log(userName);
+            PlayerPrefs.SetString("currentUserName", userName);
             Debug.Log(PlayerPrefs.GetString("currentUserName"));
             SceneManager.LoadScene("Main Menu");
         }

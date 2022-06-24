@@ -25,7 +25,7 @@ public class LetterController : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (bridgeLevelManagerController.CheckLetter(Letter))
+        if (bridgeLevelManagerController.CheckLetter(Letter) && Time.deltaTime > 0)
         {
             GameObject.Destroy(gameObject);
         }
