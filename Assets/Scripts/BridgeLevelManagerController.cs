@@ -211,6 +211,7 @@ public class BridgeLevelManagerController : MonoBehaviour
         yield return new WaitForSeconds(4f);
         if (lost)
         {
+            SavesManager.getInstance().saveBridgeGameScore(levelUIController.GetScore());
             levelUIController.LoseTheGame();
         }
         else

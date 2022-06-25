@@ -32,7 +32,6 @@ public class WindowGameLevelManager : MonoBehaviour
     private PictureController[] pictures;
     private int[] correctPictureParts;
     private int correctPictureIndex;
-    private int score;
     private bool canClick;
     
     //String array for corresponding messages
@@ -76,9 +75,6 @@ public class WindowGameLevelManager : MonoBehaviour
         {
             correctPictureParts[i] = UnityEngine.Random.Range(1, 5);
         }
-            
-        
-        //Debug.Log($"Correct: Sky = {correctPictureParts[0]} Ground = {correctPictureParts[1]} Building = {correctPictureParts[2]} Object = {correctPictureParts[3]}");
 
         mainCameraTransform.position = new Vector3(cameraPos1.position.x, mainCameraTransform.position.y, mainCameraTransform.position.z);
         promptText.text = $"Вікно відкрило мені вид на {buildingMsg[correctPictureParts[2] - 1]},\n розташований {groundMsg[correctPictureParts[1] - 1]} та {objectMsg[correctPictureParts[3] - 1]}.\n Вони {skyMsg[correctPictureParts[0] - 1]}.";      
@@ -100,9 +96,7 @@ public class WindowGameLevelManager : MonoBehaviour
         int partToChange = UnityEngine.Random.Range(0,4);
         int[] changedPictureParts = new int[4];
         Array.Copy(correctPictureParts, changedPictureParts,4);
-        //Debug.Log($"Before: {changedPictureParts[partToChange]}");
         changedPictureParts[partToChange] = GenerateUnequal(changedPictureParts[partToChange], 1);
-        //Debug.Log($"After: {changedPictureParts[partToChange]}");
         pictureController.Configure(changedPictureParts[0], changedPictureParts[1], changedPictureParts[2], changedPictureParts[3]);
     }
 
@@ -153,8 +147,7 @@ public class WindowGameLevelManager : MonoBehaviour
             if (pictureToCheck == pictures[0])
             {
                 canClick = false;
-                score++;
-                Debug.Log("correct");
+                levelUIController.AddScore(1);
                 audioSource.Play();
                 if (timeToRemember > 5)
                     timeToRemember--;
@@ -164,12 +157,11 @@ public class WindowGameLevelManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("incorrect");
                 levelUIController.MakeMistake();
                 if (levelUIController.GetLifesCount() == 0)
                 {
+                    SavesManager.getInstance().saveWindowGameScore(levelUIController.GetScore());
                     canClick = false;
-                    levelUIController.AddScore(score);
                     levelUIController.LoseTheGame();
                 }
             }

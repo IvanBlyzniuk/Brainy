@@ -10,11 +10,13 @@ public class PauseController : MonoBehaviour
     private GameObject pauseScreen;
     [SerializeField]
     private GameObject pauseButton;
+    [SerializeField]
+    private TextMeshProUGUI volumeNumber;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        volumeNumber.text = (Mathf.Round(PlayerPrefs.GetFloat("Volume") * 10)).ToString();
     }
 
     // Update is called once per frame
@@ -68,6 +70,7 @@ public class PauseController : MonoBehaviour
                 a.volume = 1f;
         }
         PlayerPrefs.SetFloat("Volume", FindObjectOfType<AudioSource>().volume);
+        volumeNumber.text = (Mathf.Round(PlayerPrefs.GetFloat("Volume") * 10)).ToString();
     }
     public void VolumeDown()
     {
@@ -79,5 +82,7 @@ public class PauseController : MonoBehaviour
                 a.volume = 0f;
         }
         PlayerPrefs.SetFloat("Volume", FindObjectOfType<AudioSource>().volume);
+        
+        volumeNumber.text = (Mathf.Round(PlayerPrefs.GetFloat("Volume") * 10)).ToString();
     }
 }

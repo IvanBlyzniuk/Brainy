@@ -43,13 +43,14 @@ public class PictureController : MonoBehaviour
 
     private void OnMouseDown()
     {
-        //borderSprite = borderSelectedSprite;
-        StartCoroutine(levelManager.checkPicture(this));
+        if(Time.deltaTime > 0)
+            StartCoroutine(levelManager.checkPicture(this));
     }
 
     private void OnMouseEnter()
     {
-        border.sprite = borderSelectedSprite;
+        if (Time.deltaTime > 0)
+            border.sprite = borderSelectedSprite;
     }
 
     private void OnMouseExit()

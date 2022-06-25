@@ -99,7 +99,7 @@ public class BubbleController : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (exist)
+        if (exist && Time.deltaTime > 0)
         {
             exist = false;
             if (correct)
