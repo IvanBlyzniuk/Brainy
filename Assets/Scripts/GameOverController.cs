@@ -9,8 +9,6 @@ public class GameOverController : MonoBehaviour
     [SerializeField]
     private GameObject gameOverScreen;
     [SerializeField]
-    private string sceneName;
-    [SerializeField]
     private TextMeshProUGUI scoreText;
     [SerializeField]
     private TextMeshProUGUI scoreCount;
@@ -42,7 +40,7 @@ public class GameOverController : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void GoToMainMenu()
     {
