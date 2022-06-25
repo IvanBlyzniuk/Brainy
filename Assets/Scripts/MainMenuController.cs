@@ -41,6 +41,7 @@ public class MainMenuController : MonoBehaviour
     public void PlayWindowGame()
     {
         PlayerPrefs.SetFloat("Volume", volume);
+        SceneManager.LoadScene("Window Game");
     }
     public void PlayOrchestralGame()
     {
