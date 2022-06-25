@@ -14,11 +14,16 @@ public class GameOverController : MonoBehaviour
     private TextMeshProUGUI scoreText;
     [SerializeField]
     private TextMeshProUGUI scoreCount;
+    [SerializeField]
+    private GameObject pauseButton;
+    
     private LevelUIController levelUIController;
     // Start is called before the first frame update
     void Start()
     {
+        
         levelUIController = FindObjectOfType<LevelUIController>();
+        
         
     }
 
@@ -29,6 +34,7 @@ public class GameOverController : MonoBehaviour
     }
     public void EndGame()
     {
+        pauseButton.SetActive(false);
         scoreCount.text = levelUIController.GetScore().ToString();
         gameOverScreen.SetActive(true);
         Time.timeScale = 0f;

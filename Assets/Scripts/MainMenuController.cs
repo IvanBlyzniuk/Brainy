@@ -10,6 +10,8 @@ public class MainMenuController : MonoBehaviour
     private float volume;
     [SerializeField]
     private TextMeshProUGUI volumeText;
+    [SerializeField]
+    private GameObject stopPlayingScreen;
     void Start()
     {
         volume = PlayerPrefs.GetFloat("Volume");
@@ -22,21 +24,36 @@ public class MainMenuController : MonoBehaviour
         }
         volumeText.text = ((int)(volume*10)).ToString();
         Debug.Log(volume);
+        if (Time.realtimeSinceStartup > 10)
+        {
+            stopPlayingScreen.SetActive(true);
+        }
     }
     public void PlayBridgeGame()
     {
+        if (!stopPlayingScreen.activeSelf)
+        {
+
+        
         PlayerPrefs.SetFloat("Volume",volume);
         SceneManager.LoadScene("BridgeGame");
+        }
     }
     public void PlayBubbleGame()
     {
-        PlayerPrefs.SetFloat("Volume", volume);
-        SceneManager.LoadScene("Bubble game");
+        if (!stopPlayingScreen.activeSelf)
+        {
+            PlayerPrefs.SetFloat("Volume", volume);
+            SceneManager.LoadScene("Bubble game");
+        }
     }
     public void PlayWindowGame()
     {
-        PlayerPrefs.SetFloat("Volume", volume);
-        SceneManager.LoadScene("Window Game");
+        if (!stopPlayingScreen.activeSelf)
+        {
+            PlayerPrefs.SetFloat("Volume", volume);
+            SceneManager.LoadScene("Window Game");
+        }
     }
     public void PlayOrchestralGame()
     {
@@ -46,34 +63,46 @@ public class MainMenuController : MonoBehaviour
     }
     public void GoToScoreScreen()
     {
-        SceneManager.LoadScene("Score Menu");
+        if (!stopPlayingScreen.activeSelf)
+        {
+            SceneManager.LoadScene("Score Menu");
+        }
     }
 
     public void ExitGame()
     {
-        Debug.Log("Exit completed");
-        Application.Quit();
+        if (!stopPlayingScreen.activeSelf)
+        {
+            Debug.Log("Exit completed");
+            Application.Quit();
+        }
     }
 
     public void IncreaseVolume()
     {
-        if(volume < 1)
+        if (!stopPlayingScreen.activeSelf)
         {
-            volume += 0.1f;
-            volumeText.text = ((int)(volume * 10)).ToString();
+            if (volume < 1)
+            {
+                volume += 0.1f;
+                volumeText.text = ((int)(volume * 10)).ToString();
+            }
         }
     }
     public void DecreaseVolume()
     {
-        if (volume > 0)
+        if (!stopPlayingScreen.activeSelf)
         {
-            volume -= 0.1f;
-            volumeText.text = ((int)(volume * 10)).ToString();
-        }
-        if(volume < 0.1f)
-        {
-            volume = 0;
-            volumeText.text = ((int)(volume * 10)).ToString();
+            if (volume > 0)
+            {
+                volume -= 0.1f;
+                volumeText.text = ((int)(volume * 10)).ToString();
+            }
+            if (volume < 0.1f)
+            {
+                volume = 0;
+                volumeText.text = ((int)(volume * 10)).ToString();
+            }
         }
     }
 }
