@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1d94cd19491b1704abb6d01565d2a967, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b6904cc3268d803438b50d412363381a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -234,8 +234,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4284648949
-  m_fontColor: {r: 0.9622642, g: 0.5520699, b: 0.38581347, a: 1}
+    rgba: 4293246976
+  m_fontColor: {r: 0, g: 0.7529412, b: 0.8980392, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
