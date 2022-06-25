@@ -111,6 +111,7 @@ public class OrchestraLevelManager : MonoBehaviour
                 levelUIController.MakeMistake();
                 if(levelUIController.GetLifesCount() <= 0)
                 {
+                    SavesManager.getInstance().saveOrchestraGameScore(levelUIController.GetScore());
                     levelUIController.LoseTheGame();
                 }
                 Debug.Log("Bad");

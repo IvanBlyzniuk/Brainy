@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreMenuManager : MonoBehaviour
 {
@@ -38,5 +39,10 @@ public class ScoreMenuManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void goToMainMenu()
+    {
+        SceneManager.LoadScene("Main Menu");
     }
 }

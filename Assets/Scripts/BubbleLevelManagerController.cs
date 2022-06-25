@@ -17,7 +17,6 @@ public class BubbleLevelManagerController : MonoBehaviour
     private float _spawnLB;
     private float _spawnRB;
     private float _spawnY;
-    private int score = 0;
     private int lives = 3;
     private int livesLeft;
     private float speedModifier = 1;
@@ -52,15 +51,13 @@ public class BubbleLevelManagerController : MonoBehaviour
 
     public void addScore()
     {
-        score++;
-        if (score % 5 == 0)
+        levelUIController.AddScore(1);
+        if (levelUIController.GetScore() % 5 == 0)
         {
             speedModifier += 0.2f;
             if(timeBetweenSpawns > 1)
                 timeBetweenSpawns -= 0.2f;
         }
-            
-        Debug.Log("score=" + score);
     }
     public void loseLife()
     {
@@ -68,8 +65,7 @@ public class BubbleLevelManagerController : MonoBehaviour
         levelUIController.MakeMistake();
         if (livesLeft == 0)
         {
-            SavesManager.getInstance().saveBubbleGameScore(score);
-            levelUIController.AddScore(score);
+            SavesManager.getInstance().saveBubbleGameScore(levelUIController.GetScore());
             levelUIController.LoseTheGame();
         }
     }
