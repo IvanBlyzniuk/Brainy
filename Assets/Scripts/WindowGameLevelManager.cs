@@ -33,9 +33,10 @@ public class WindowGameLevelManager : MonoBehaviour
     private int[] correctPictureParts;
     private int correctPictureIndex;
     private bool canClick;
-    
+
     //String array for corresponding messages
-    private string[] skyMsg = new string[]{"зустрічали ранкове сонце", "були освітлені полуденим сонцем",
+    private string[] beginningMsg = new string[] { "Вікно відкрило мені вид на", "Я побачив у вікні", "У вікні я побачив", "У вікні відкрився вид на" };
+    private string[] skyMsg = new string[]{ "зустрічали ранкове сонце", "були освітлені полуденим сонцем",
         "купались у останніх вечірніх променях", "були освітлені нічним сяйвом місяця" };
     private string[] buildingMsg = new string[] { "дім", "величний замок", "старий сарай", "намет" };
     private string[] groundMsg = new string[] { "у лісі", "в горах", "на річці", "в пустелі" };
@@ -75,9 +76,9 @@ public class WindowGameLevelManager : MonoBehaviour
         {
             correctPictureParts[i] = UnityEngine.Random.Range(1, 5);
         }
-
+        int beginningMsgNum = UnityEngine.Random.Range(0, 4);
         mainCameraTransform.position = new Vector3(cameraPos1.position.x, mainCameraTransform.position.y, mainCameraTransform.position.z);
-        promptText.text = $"Вікно відкрило мені вид на {buildingMsg[correctPictureParts[2] - 1]},\n розташований {groundMsg[correctPictureParts[1] - 1]} та {objectMsg[correctPictureParts[3] - 1]}.\n Вони {skyMsg[correctPictureParts[0] - 1]}.";      
+        promptText.text = $"{beginningMsg[beginningMsgNum]} {buildingMsg[correctPictureParts[2] - 1]},\n розташований {groundMsg[correctPictureParts[1] - 1]}, та {objectMsg[correctPictureParts[3] - 1]}.\n Вони {skyMsg[correctPictureParts[0] - 1]}.";      
     }
 
     private void goToImages()

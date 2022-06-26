@@ -41,7 +41,7 @@ public class BubbleController : MonoBehaviour
         switch(UnityEngine.Random.Range(0, 3))
         {
             case 0:
-                sign = '*';
+                sign = '×';
                 n1 = UnityEngine.Random.Range(1, 10);
                 n2 = UnityEngine.Random.Range(1, 10);
                 result = n1 * n2;
