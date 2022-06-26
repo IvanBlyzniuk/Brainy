@@ -37,4 +37,8 @@ public class LoginController : MonoBehaviour
         }
         
     }
+    public void Exit()
+    {
+        Application.Quit();
+    }
 }

@@ -23,10 +23,11 @@ public class MainMenuController : MonoBehaviour
         }
         volumeText.text = (Mathf.Round(volume * 10)).ToString();
         Debug.Log(volume);
-        if (Time.realtimeSinceStartup > 10)
+        if (Time.realtimeSinceStartup > 1800)
         {
             stopPlayingScreen.SetActive(true);
         }
+        FindObjectOfType<AudioSource>().volume=volume;
     }
     public void PlayBridgeGame()
     {
@@ -51,12 +52,12 @@ public class MainMenuController : MonoBehaviour
     }
     public void GoToScoreScreen()
     {
+        PlayerPrefs.SetFloat("Volume", volume);
         SceneManager.LoadScene("Score Menu");
     }
 
     public void ExitGame()
     {
-        Debug.Log("Exit completed");
         Application.Quit();
     }
 
@@ -66,6 +67,7 @@ public class MainMenuController : MonoBehaviour
         {
             volume += 0.1f;
             volumeText.text = (Mathf.Round(volume * 10)).ToString();
+            FindObjectOfType<AudioSource>().volume = volume;
         }
     }
     public void DecreaseVolume()
@@ -80,6 +82,7 @@ public class MainMenuController : MonoBehaviour
             volume = 0;
             volumeText.text = (Mathf.Round(volume * 10)).ToString();
         }
+        FindObjectOfType<AudioSource>().volume = volume;
     }
 
     public void ContinueRegardless()

@@ -20,6 +20,7 @@ public class ScoreMenuManager : MonoBehaviour
     private ScoreGroupController orchestraGameGroup;
     void Start()
     {
+        FindObjectOfType<AudioSource>().volume = PlayerPrefs.GetFloat("Volume");
         SavesManager savesManager = SavesManager.getInstance();
 
         KeyValuePair<string, int> best = savesManager.getBubbleGameMaxScore();

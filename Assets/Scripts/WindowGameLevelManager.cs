@@ -45,6 +45,7 @@ public class WindowGameLevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Destroy(FindObjectOfType<MainMusicController>().gameObject);
         levelUIController = FindObjectOfType<LevelUIController>();
         audioSource = GetComponent<AudioSource>();
         audioSource.volume = PlayerPrefs.GetFloat("Volume");

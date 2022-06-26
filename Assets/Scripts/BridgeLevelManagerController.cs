@@ -37,18 +37,22 @@ public class BridgeLevelManagerController : MonoBehaviour
     private GameObject hero;
     [SerializeField]
     private TimerController timer;
+    [SerializeField]
+    private AudioSource music;
     private Animator anim;
     private AudioSource winSound;
 
 
     void Start()
     {
+        Destroy(FindObjectOfType<MainMusicController>().gameObject);
         timer = FindObjectOfType<TimerController>();
         levelUIController = FindObjectOfType<LevelUIController>();
         instatntEarthLeftPosition = earthLeft.transform.position;
         instatntEarthRightPosition = earthRight.transform.position;
         anim = hero.GetComponent<Animator>();
         winSound = GetComponent<AudioSource>();
+        winSound.volume = PlayerPrefs.GetFloat("Volume");
         Init();
     }
 
