@@ -44,6 +44,7 @@ public class LevelUIController : MonoBehaviour
     //TODO remind Vania + make end game screen
     public void LoseTheGame()
     {
+
         gameOverController.EndGame();
     }
     public int GetLifesCount()
