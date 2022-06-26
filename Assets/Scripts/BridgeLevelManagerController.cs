@@ -45,7 +45,8 @@ public class BridgeLevelManagerController : MonoBehaviour
 
     void Start()
     {
-        Destroy(FindObjectOfType<MainMusicController>().gameObject);
+        if (FindObjectOfType<MainMusicController>()!= null)
+            Destroy(FindObjectOfType<MainMusicController>().gameObject);
         timer = FindObjectOfType<TimerController>();
         levelUIController = FindObjectOfType<LevelUIController>();
         instatntEarthLeftPosition = earthLeft.transform.position;

@@ -34,7 +34,8 @@ public class OrchestraLevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(FindObjectOfType<MainMusicController>().gameObject);
+        if (FindObjectOfType<MainMusicController>() != null)
+            Destroy(FindObjectOfType<MainMusicController>().gameObject);
         winningMusic.volume = PlayerPrefs.GetFloat("Volume");
         controllers = new List<MusicianController>();
         levelUIController = FindObjectOfType<LevelUIController>();
