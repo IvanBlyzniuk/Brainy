@@ -9,11 +9,11 @@ public class BridgeLevelManagerController : MonoBehaviour
 {
     private bool isActive = true;
     private bool lost = false;
-    private int dictionaryLength = 0;
+    //private int dictionaryLength = 0;
     private int curPosition = 0;
     private int level = 0;
     private int scoreToAdd = 1;
-    private string path = "Assets/Files/dictionary.txt";
+    //private string path;
     private string selectedWord;
     private List<char> characters;
     private List<GameObject> objects;
@@ -39,8 +39,11 @@ public class BridgeLevelManagerController : MonoBehaviour
     private TimerController timer;
     [SerializeField]
     private AudioSource music;
+    [SerializeField]
+    private TextAsset dictionary;
     private Animator anim;
     private AudioSource winSound;
+    private string[] words;
 
 
     void Start()
@@ -73,15 +76,10 @@ public class BridgeLevelManagerController : MonoBehaviour
 
     private string ChooseTheWord()
     {
-        string word = "";
-        StreamReader reader = new StreamReader(path);
-        int stop = Random.Range(1, dictionaryLength+1);
-        
-        for(int i = 0; i < stop; i++)
-        {
-            word = reader.ReadLine();
-        }
-        reader.Close();
+        if (words == null)
+            words = dictionary.text.Split(new char[] { '\n', '\r' },System.StringSplitOptions.RemoveEmptyEntries);
+        int index = Random.Range(0, words.Length);
+        string word = words[index];
         return word;
     }
 
@@ -141,13 +139,13 @@ public class BridgeLevelManagerController : MonoBehaviour
         objects = new List<GameObject>();
         bridgeParts = new List<GameObject>();
         curPosition = 0;
-        dictionaryLength = 0;
-        StreamReader reader = new StreamReader(path);
-        while (reader.ReadLine() != null)
-        {
-            dictionaryLength++;
-        }
-        reader.Close();
+        //dictionaryLength = 0;
+        //StreamReader reader = new StreamReader(path);
+        //while (reader.ReadLine() != null)
+        //{
+        //    dictionaryLength++;
+        //}
+        //reader.Close();
         selectedWord = ChooseTheWord();
         for (int i = 0; i < selectedWord.Length; i++)
         {

@@ -942,6 +942,7 @@ MonoBehaviour:
   hero: {fileID: 1258806706}
   timer: {fileID: 560349769}
   music: {fileID: 0}
+  dictionary: {fileID: 4900000, guid: b1ce4fdd379c6574e963569558d923c3, type: 3}
 --- !u!4 &1907294403
 Transform:
   m_ObjectHideFlags: 0
