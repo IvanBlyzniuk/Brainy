@@ -6,7 +6,7 @@ using UnityEngine;
 public class SavesManager
 {
     private static SavesManager instance;
-    private static readonly string BaseFolder = "Saves";
+    private static readonly string BaseFolder = Path.Combine(Application.dataPath,"Saves");
 
     private Dictionary<string, int> bubbleGameScores;
     private Dictionary<string, int> bridgeGameScores;
@@ -46,6 +46,7 @@ public class SavesManager
 
     private void serialize(Dictionary<string, int> data, string name)
     {
+        Debug.Log("Serialization");
         using (var sw = new StreamWriter(Path.Combine(BaseFolder, name), false))
         {
             foreach(KeyValuePair<string, int> kvp in data)
@@ -69,11 +70,13 @@ public class SavesManager
         if(!bubbleGameScores.ContainsKey(username))
         {
             bubbleGameScores.Add(username, score);
+            serialize(bubbleGameScores, "bubbleGameScores.dat");
             return;
         }
         int oldScore = bubbleGameScores[username];
         if (score > oldScore)
             bubbleGameScores[username] = score;
+        Debug.Log("saving");
         serialize(bubbleGameScores, "bubbleGameScores.dat");
     }
 
@@ -85,6 +88,7 @@ public class SavesManager
         if (!bridgeGameScores.ContainsKey(username))
         {
             bridgeGameScores.Add(username, score);
+            serialize(bridgeGameScores, "bridgeGameScores.dat");
             return;
         }
         int oldScore = bridgeGameScores[username];
@@ -99,6 +103,7 @@ public class SavesManager
         if (!windowGameScores.ContainsKey(username))
         {
             windowGameScores.Add(username, score);
+            serialize(windowGameScores, "windowGameScores.dat");
             return;
         }
         int oldScore = windowGameScores[username];
@@ -113,6 +118,7 @@ public class SavesManager
         if (!orchestraGameScores.ContainsKey(username))
         {
             orchestraGameScores.Add(username, score);
+            serialize(orchestraGameScores, "orchestraGameScores.dat");
             return;
         }
         int oldScore = orchestraGameScores[username];
