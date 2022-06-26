@@ -21,7 +21,7 @@ public class MainMenuController : MonoBehaviour
             volume = 0.5f;
             PlayerPrefs.SetInt("IsSoundInitialized", 1);
         }
-        volumeText.text = ((int)(volume * 10)).ToString();
+        volumeText.text = (Mathf.Round(volume * 10)).ToString();
         Debug.Log(volume);
         if (Time.realtimeSinceStartup > 10)
         {
@@ -65,7 +65,7 @@ public class MainMenuController : MonoBehaviour
         if (volume < 1)
         {
             volume += 0.1f;
-            volumeText.text = ((int)(volume * 10)).ToString();
+            volumeText.text = (Mathf.Round(volume * 10)).ToString();
         }
     }
     public void DecreaseVolume()
@@ -73,12 +73,12 @@ public class MainMenuController : MonoBehaviour
         if (volume > 0)
         {
             volume -= 0.1f;
-            volumeText.text = ((int)(volume * 10)).ToString();
+            volumeText.text = (Mathf.Round(volume * 10)).ToString();
         }
         if (volume < 0.1f)
         {
             volume = 0;
-            volumeText.text = ((int)(volume * 10)).ToString();
+            volumeText.text = (Mathf.Round(volume * 10)).ToString();
         }
     }
 
