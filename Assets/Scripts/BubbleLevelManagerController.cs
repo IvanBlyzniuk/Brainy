@@ -70,6 +70,7 @@ public class BubbleLevelManagerController : MonoBehaviour
         if (livesLeft == 0)
         {
             SavesManager.getInstance().saveBubbleGameScore(levelUIController.GetScore());
+            Debug.Log("trying to save");
             levelUIController.LoseTheGame();
         }
     }
