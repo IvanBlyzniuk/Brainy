@@ -25,8 +25,9 @@ public class BubbleLevelManagerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Destroy(FindObjectOfType<MainMusicController>().gameObject);
         TimerController timer = FindObjectOfType<TimerController>();
-        GameObject.Destroy(timer.gameObject, 3.5f);
+        GameObject.Destroy(timer.gameObject, 4f);
         _spawnLB = leftSpawningBound.transform.position.x;
         _spawnRB = rightSpawningBound.transform.position.x;
         _spawnY = leftSpawningBound.transform.position.y;

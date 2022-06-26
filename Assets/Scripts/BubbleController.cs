@@ -23,8 +23,6 @@ public class BubbleController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(FindObjectOfType<MainMusicController>().gameObject);
-        GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("Volume");
         exist = true;
         _textMeshPro = GetComponentInChildren<TextMeshPro>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
