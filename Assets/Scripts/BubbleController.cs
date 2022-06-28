@@ -4,6 +4,9 @@ using UnityEngine;
 using TMPro;
 using System;
 
+/// <summary>
+/// Controller for bubbles in bubble game
+/// </summary>
 public class BubbleController : MonoBehaviour
 {
     [SerializeField]
@@ -20,6 +23,7 @@ public class BubbleController : MonoBehaviour
     private float _delta = 0.01f;
     private BubbleLevelManagerController _bubbleLevelManager;
     private Animator _anim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,11 +38,30 @@ public class BubbleController : MonoBehaviour
         _anim = GetComponent<Animator>();
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        if (exist)
+        {
+            if (Math.Abs(_rigidbody2D.velocity.x - _targetVelocity.x) > _delta)
+                _rigidbody2D.velocity = Vector2.Lerp(_rigidbody2D.velocity, _targetVelocity, 10 * Time.deltaTime);
+            else
+            {
+                _targetVelocity = new Vector2(HorizontalSpeedDelta * UnityEngine.Random.Range(-1f, 1f), _rigidbody2D.velocity.y);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Generates a methematical equation that will be shown inside of a bubble with addition/substraction/multiplication/division with numbers 1..9
+    /// </summary>
+    /// <param name="correct">Whether the equation should be correct, the answer of incorrect equation will be incorrect by [-5;5] excluding 0</param>
+    /// <returns>string wersion of equation</returns>
     private string generateEquation(bool correct)
     {
         int n1 = 0, n2 = 0, result = 0;
         char sign = '0';
-        switch(UnityEngine.Random.Range(0, 3))
+        switch (UnityEngine.Random.Range(0, 3))
         {
             case 0:
                 sign = '×';
@@ -65,7 +88,7 @@ public class BubbleController : MonoBehaviour
                 n1 = result + n2;
                 break;
         }
-        if(!correct)
+        if (!correct)
         {
             int newResult;
             newResult = UnityEngine.Random.Range(-5, 5);
@@ -74,29 +97,16 @@ public class BubbleController : MonoBehaviour
             if (result == 0 && newResult < 0)
                 result++;
             result += newResult;
-            if(result < 0)
+            if (result < 0)
                 result = 0;
         }
 
         return $"{n1}{sign}{n2}={result}";
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (exist)
-        {
-            if (Math.Abs(_rigidbody2D.velocity.x - _targetVelocity.x) > _delta)
-                _rigidbody2D.velocity = Vector2.Lerp(_rigidbody2D.velocity, _targetVelocity, 10 * Time.deltaTime);
-            else
-            {
-                _targetVelocity = new Vector2(HorizontalSpeedDelta * UnityEngine.Random.Range(-1f, 1f), _rigidbody2D.velocity.y);
-            }
-        }
-    }
-
-
-
+    /// <summary>
+    /// When the bubble is clicked it will pop and add score if it was correct or lose a life otherwise
+    /// </summary>
     private void OnMouseDown()
     {
         if (exist && Time.deltaTime > 0)
@@ -114,12 +124,20 @@ public class BubbleController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Processing collisions with other bubbles just invert horizontal speed
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
         _targetVelocity.x *= -1;
         _rigidbody2D.velocity = new Vector2(-_rigidbody2D.velocity.x, _rigidbody2D.velocity.y);
     }
 
+    /// <summary>
+    /// Destroys this bubble and loses life if it was correct
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (correct)

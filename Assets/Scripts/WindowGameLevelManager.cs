@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Level manager for window game
+/// </summary>
 public class WindowGameLevelManager : MonoBehaviour
 {
     [SerializeField]
@@ -34,7 +37,7 @@ public class WindowGameLevelManager : MonoBehaviour
     private int correctPictureIndex;
     private bool canClick;
 
-    //String array for corresponding messages
+    //String arrays for corresponding messages
     private string[] beginningMsg = new string[] { "Вікно відкрило мені вид на", "Я побачив у вікні", "У вікні я побачив", "У вікні відкрився вид на" };
     private string[] skyMsg = new string[]{ "зустрічали ранкове сонце", "були освітлені полуденим сонцем",
         "купались у останніх вечірніх променях", "були освітлені нічним сяйвом місяця" };
@@ -68,6 +71,10 @@ public class WindowGameLevelManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Starts the sequence of showing the prompt text, waiting and moving the view to images
+    /// Generates the correct image randomly, configures the prompt text correspondingly
+    /// </summary>
     private void StartSequence()
     {
         canClick = true;
@@ -83,6 +90,10 @@ public class WindowGameLevelManager : MonoBehaviour
         promptText.text = $"{beginningMsg[beginningMsgNum]} {buildingMsg[correctPictureParts[2] - 1]},\n розташований {groundMsg[correctPictureParts[1] - 1]}, та {objectMsg[correctPictureParts[3] - 1]}.\n Вони {skyMsg[correctPictureParts[0] - 1]}.";      
     }
 
+    /// <summary>
+    /// Moves the camera to images and generates incorrect images
+    /// 2 images have 1 incorrect part and 1 has 2 incorrect parts
+    /// </summary>
     private void goToImages()
     {
         shufflePictures();
@@ -94,6 +105,11 @@ public class WindowGameLevelManager : MonoBehaviour
         mainCameraTransform.position = new Vector3(cameraPos2.position.x, mainCameraTransform.position.y, mainCameraTransform.position.z);
     }
 
+    /// <summary>
+    /// Configures the image to have 1 part different from the correct image
+    /// </summary>
+    /// <param name="pictureController">Picure to configure</param>
+    /// <param name="correctPictureParts">Indexes of parts of correct image</param>
     private void generateIncorret(PictureController pictureController, int[] correctPictureParts)
     {
         int partToChange = UnityEngine.Random.Range(0,4);
@@ -103,6 +119,11 @@ public class WindowGameLevelManager : MonoBehaviour
         pictureController.Configure(changedPictureParts[0], changedPictureParts[1], changedPictureParts[2], changedPictureParts[3]);
     }
 
+    /// <summary>
+    /// Configures the image to have 2 parts different from the correct image
+    /// </summary>
+    /// <param name="pictureController">Picure to configure</param>
+    /// <param name="correctPictureParts">Indexes of parts of correct image</param>
     private void generateVeryIncorrect(PictureController pictureController, int[] correctPictureParts)
     {
         int[] changedPictureParts = new int[4];
@@ -114,6 +135,12 @@ public class WindowGameLevelManager : MonoBehaviour
         pictureController.Configure(changedPictureParts[0], changedPictureParts[1], changedPictureParts[2], changedPictureParts[3]);
     }
 
+    /// <summary>
+    /// Generates a number of  sequence of 4 that is not equal to oldval
+    /// </summary>
+    /// <param name="oldval">Old value that the new value should not be equal</param>
+    /// <param name="lb">Beginning of a sequence, if 0 sequence is 0..3 if 1 sequence is 1..4</param>
+    /// <returns></returns>
     private int GenerateUnequal(int oldval, int lb)
     {
         int res = oldval;
@@ -124,6 +151,9 @@ public class WindowGameLevelManager : MonoBehaviour
         return res;
     }
 
+    /// <summary>
+    /// Shuffles the array of pictures so that they are in a random order in the beginning of a round
+    /// </summary>
     private void shufflePictures()
     {
         for(int i=0;i<pictures.Length;i++)
@@ -134,6 +164,12 @@ public class WindowGameLevelManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Swaps 2 picture controller in an array
+    /// </summary>
+    /// <param name="list"></param>
+    /// <param name="pos1"></param>
+    /// <param name="pos2"></param>
     private void swap(PictureController[] list, int pos1, int pos2)
     {
         PictureController tmp;
@@ -142,6 +178,11 @@ public class WindowGameLevelManager : MonoBehaviour
         list[pos2] = tmp;
     }
 
+    /// <summary>
+    /// Checks if the specified picture is correct and adds score or loses life accordingly
+    /// </summary>
+    /// <param name="pictureToCheck"></param>
+    /// <returns></returns>
     public IEnumerator checkPicture(PictureController pictureToCheck)
     {
 

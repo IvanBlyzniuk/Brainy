@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+/// <summary>
+/// Singleton class that manages saves for all of the games
+/// </summary>
 public class SavesManager
 {
     private static SavesManager instance;
     private static readonly string BaseFolder = Path.Combine(Application.dataPath,"Saves");
-
     private Dictionary<string, int> bubbleGameScores;
     private Dictionary<string, int> bridgeGameScores;
     private Dictionary<string, int> windowGameScores;
@@ -24,6 +26,11 @@ public class SavesManager
         orchestraGameScores = deserialize("orchestraGameScores.dat");
     }
 
+    /// <summary>
+    /// Deserializes dictionary of specified name from the disc reading key-value pairs from consecutive lines
+    /// </summary>
+    /// <param name="name">Name of the file should be in .dat format</param>
+    /// <returns>Dictionary of nicknames to maxscores of each user</returns>
     private Dictionary<string, int> deserialize(string name)
     {
         string filepath = Path.Combine(BaseFolder, name);
@@ -43,10 +50,13 @@ public class SavesManager
 
         return dict;
     }
-
+    /// <summary>
+    /// Serializes dictionary to the disc writing key-value pairs in new lines (one line for key and one for value)
+    /// </summary>
+    /// <param name="data"></param>
+    /// <param name="name"></param>
     private void serialize(Dictionary<string, int> data, string name)
     {
-        Debug.Log("Serialization");
         using (var sw = new StreamWriter(Path.Combine(BaseFolder, name), false))
         {
             foreach(KeyValuePair<string, int> kvp in data)
@@ -57,6 +67,10 @@ public class SavesManager
         }
     }
 
+    /// <summary>
+    /// Returns the instance of this class and creates it if needed
+    /// </summary>
+    /// <returns></returns>
     public static SavesManager getInstance()
     {
         if (instance == null)
@@ -64,6 +78,10 @@ public class SavesManager
         return instance;
     }
 
+    /// <summary>
+    /// Saves and serializes bubble game score
+    /// </summary>
+    /// <param name="score"></param>
     public void saveBubbleGameScore(int score)
     {
         string username = PlayerPrefs.GetString("currentUserName");
@@ -76,12 +94,13 @@ public class SavesManager
         int oldScore = bubbleGameScores[username];
         if (score > oldScore)
             bubbleGameScores[username] = score;
-        Debug.Log("saving");
         serialize(bubbleGameScores, "bubbleGameScores.dat");
     }
 
-
-
+    /// <summary>
+    /// Saves and serializes bridge game score
+    /// </summary>
+    /// <param name="score"></param>
     public void saveBridgeGameScore(int score)
     {
         string username = PlayerPrefs.GetString("currentUserName");
@@ -97,6 +116,10 @@ public class SavesManager
         serialize(bridgeGameScores, "bridgeGameScores.dat");
     }
 
+    /// <summary>
+    /// Saves and serializes window game score
+    /// </summary>
+    /// <param name="score"></param>
     public void saveWindowGameScore(int score)
     {
         string username = PlayerPrefs.GetString("currentUserName");
@@ -112,6 +135,10 @@ public class SavesManager
         serialize(windowGameScores, "windowGameScores.dat");
     }
 
+    /// <summary>
+    /// Saves and serializes orchestra game score
+    /// </summary>
+    /// <param name="score"></param>
     public void saveOrchestraGameScore(int score)
     {
         string username = PlayerPrefs.GetString("currentUserName");
@@ -127,6 +154,11 @@ public class SavesManager
         serialize(orchestraGameScores, "orchestraGameScores.dat");
     }
 
+    /// <summary>
+    /// Returns the max score of current user (taken from PlayerPrefs) from scpecified dictionary
+    /// </summary>
+    /// <param name="scores">dictionary to look through</param>
+    /// <returns>max score of current user</returns>
     private int getScore(Dictionary<string,int> scores)
     {
         string username = PlayerPrefs.GetString("currentUserName");
@@ -135,26 +167,47 @@ public class SavesManager
         return scores[username];
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns>Max score of current user (taken from PlayerPrefs) in bubble game</returns>
     public int getBubbleGameScore()
     {
         return getScore(bubbleGameScores);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns>Max score of current user (taken from PlayerPrefs) in bridge game</returns>
     public int getBridgeGameScore()
     {
         return getScore(bridgeGameScores);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns>Max score of current user (taken from PlayerPrefs) in window game</returns>
     public int getWindowGameScore()
     {
         return getScore(windowGameScores);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns>Max score of current user (taken from PlayerPrefs) in orchestra game</returns>
     public int getOrchestraGameScore()
     {
         return getScore(orchestraGameScores);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="scores"></param>
+    /// <returns>Pair of name of user with max score in specified dictionary and corresponding score</returns>
     private KeyValuePair<string, int> getMaxScore(Dictionary<string, int> scores)
     {
         KeyValuePair<string, int> res = new KeyValuePair<string, int>("------",0);
@@ -166,21 +219,37 @@ public class SavesManager
         return res;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns>Pair of name of user with max score in bubble game and corresponding score</returns>
     public KeyValuePair<string,int> getBubbleGameMaxScore()
     {
         return getMaxScore(bubbleGameScores);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns>Pair of name of user with max score in bridge game and corresponding score</returns>
     public KeyValuePair<string, int> getBridgeGameMaxScore()
     {
         return getMaxScore(bridgeGameScores);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns>Pair of name of user with max score in window game and corresponding score</returns>
     public KeyValuePair<string, int> getWindowGameMaxScore()
     {
         return getMaxScore(windowGameScores);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns>Pair of name of user with max score in orchestra game and corresponding score</returns>
     public KeyValuePair<string, int> getOrchestraGameMaxScore()
     {
         return getMaxScore(orchestraGameScores);

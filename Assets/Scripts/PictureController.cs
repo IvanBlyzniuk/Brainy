@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Controller for pictures in window game
+/// </summary>
 public class PictureController : MonoBehaviour
 {
     [SerializeField]
@@ -33,6 +36,13 @@ public class PictureController : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Configures the image using image parts with corresponding ids
+    /// </summary>
+    /// <param name="skyIndex"></param>
+    /// <param name="groundIndex"></param>
+    /// <param name="buildingIndex"></param>
+    /// <param name="objectIndex"></param>
     public void Configure(int skyIndex, int groundIndex, int buildingIndex, int objectIndex)
     {
         sky.sprite = Resources.Load<Sprite>($"Sprites/Window Game/Image Parts/Sky_{skyIndex}");
@@ -41,18 +51,27 @@ public class PictureController : MonoBehaviour
         theObject.sprite = Resources.Load<Sprite>($"Sprites/Window Game/Image Parts/Object_{objectIndex}");
     }
 
+    /// <summary>
+    /// Checks if pressed picture is correct via WindowGameLevelManager
+    /// </summary>
     private void OnMouseDown()
     {
         if(Time.deltaTime > 0)
             StartCoroutine(levelManager.checkPicture(this));
     }
 
+    /// <summary>
+    /// Changes the border of the picture to be highlited
+    /// </summary>
     private void OnMouseEnter()
     {
         if (Time.deltaTime > 0)
             border.sprite = borderSelectedSprite;
     }
 
+    /// <summary>
+    /// Changes the border of the picture to be normal
+    /// </summary>
     private void OnMouseExit()
     {
         border.sprite = borderSprite;

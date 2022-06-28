@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Controller for Level Manager of bubble game
+/// </summary>
 public class BubbleLevelManagerController : MonoBehaviour
 {
     [SerializeField]
@@ -53,6 +56,9 @@ public class BubbleLevelManagerController : MonoBehaviour
             
     }
 
+    /// <summary>
+    /// Increases score by 1 and increases difficulty every 5 points
+    /// </summary>
     public void addScore()
     {
         levelUIController.AddScore(1);
@@ -63,6 +69,10 @@ public class BubbleLevelManagerController : MonoBehaviour
                 timeBetweenSpawns -= 0.2f;
         }
     }
+
+    /// <summary>
+    /// Loses life and checks for game over
+    /// </summary>
     public void loseLife()
     {
         livesLeft--;
@@ -75,6 +85,10 @@ public class BubbleLevelManagerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns>Speed modifier that can be used when generating bubbles</returns>
     public float getSpeedModifier()
     {
         return speedModifier;

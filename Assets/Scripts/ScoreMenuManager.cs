@@ -4,12 +4,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Manager of score menu that shows your/max scores for every game
+/// </summary>
 public class ScoreMenuManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-
-
-
+    
     [SerializeField]
     private ScoreGroupController bubbleGameGroup;
     [SerializeField]
@@ -18,6 +18,7 @@ public class ScoreMenuManager : MonoBehaviour
     private ScoreGroupController windowGameGroup;
     [SerializeField]
     private ScoreGroupController orchestraGameGroup;
+    // Start is called before the first frame update
     void Start()
     {
         FindObjectOfType<AudioSource>().volume = PlayerPrefs.GetFloat("Volume");
@@ -36,12 +37,9 @@ public class ScoreMenuManager : MonoBehaviour
         orchestraGameGroup.setTexts(savesManager.getOrchestraGameScore().ToString(), best.Value.ToString(), best.Key);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    /// <summary>
+    /// Changes scene to main menu
+    /// </summary>
     public void goToMainMenu()
     {
         SceneManager.LoadScene("Main Menu");
