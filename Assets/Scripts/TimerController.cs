@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+/// <summary>
+/// class which controls the timer object
+/// </summary>
 public class TimerController : MonoBehaviour
 {
     [SerializeField]
@@ -13,14 +15,19 @@ public class TimerController : MonoBehaviour
     public float TimeStart { get => timeStart; set => timeStart = value; }
     public bool IsActive { get => isActive; set => isActive = value; }
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Start is called before the first frame update
+    /// initiates the timer text and it's starting time
+    /// </summary>
     void Start()
     {
        timerText = GetComponent<TextMeshPro>();
        timerText.text = TimeStart.ToString();
     }
-
-    // Update is called once per frame
+    /// <summary>
+    /// Update is called once per frame
+    /// changes the time on a timer
+    /// </summary>
     void Update()
     {
         if (IsActive)
@@ -30,6 +37,10 @@ public class TimerController : MonoBehaviour
                 timerText.text = Mathf.Round(TimeStart).ToString();
         }
     }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns>current time on a timer</returns>
     public float GetCurrentTime()
     {
         return TimeStart;

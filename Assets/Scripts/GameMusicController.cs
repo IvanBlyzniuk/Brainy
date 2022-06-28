@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class GameMusicController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    /// <summary>
+    /// Start is called before the first frame update
+    /// sets the volume to the game music
+    /// </summary>
     void Start()
     {
         GetComponent<AudioSource>().volume=PlayerPrefs.GetFloat("Volume");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
