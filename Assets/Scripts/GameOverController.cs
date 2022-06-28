@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+/// <summary>
+/// class which controls the gameOver screen
+/// </summary>
 public class GameOverController : MonoBehaviour
 {
     [SerializeField]
@@ -14,22 +16,17 @@ public class GameOverController : MonoBehaviour
     private TextMeshProUGUI scoreCount;
     [SerializeField]
     private GameObject pauseButton;
-    
     private LevelUIController levelUIController;
-    // Start is called before the first frame update
+    /// <summary>
+    /// Start is called before the first frame update
+    /// </summary>
     void Start()
     {
-        
         levelUIController = FindObjectOfType<LevelUIController>();
-        
-        
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    /// <summary>
+    /// ends the game,stos the time, sets pause button to be inactive and shows the gameOver screen
+    /// </summary>
     public void EndGame()
     {
         pauseButton.SetActive(false);
@@ -37,11 +34,17 @@ public class GameOverController : MonoBehaviour
         gameOverScreen.SetActive(true);
         Time.timeScale = 0f;
     }
+    /// <summary>
+    /// sets the timeScale to 1 and reloads the current scene
+    /// </summary>
     public void Restart()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+    /// <summary>
+    /// sets the timeScale to 1 and loads the main menu scene
+    /// </summary>
     public void GoToMainMenu()
     {
         Time.timeScale = 1f;

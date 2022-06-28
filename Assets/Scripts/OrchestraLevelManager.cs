@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// class which controls the orchestral game 
+/// </summary>
 public class OrchestraLevelManager : MonoBehaviour
 {
     [SerializeField]
@@ -31,7 +33,10 @@ public class OrchestraLevelManager : MonoBehaviour
     public bool IsScreenActive { get => isScreenActive; set => isScreenActive = value; }
     public bool IsPlayingMusicSequence { get => isPlayingMusicSequence; set => isPlayingMusicSequence = value; }
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Start is called before the first frame update
+    /// initializes all the musicians and their controllers
+    /// </summary>
     void Start()
     {
         if (FindObjectOfType<MainMusicController>() != null)
@@ -50,13 +55,9 @@ public class OrchestraLevelManager : MonoBehaviour
         StartCoroutine(WaitUntillTheFirstStart());
         
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    /// <summary>
+    /// inits the game, creating the music sequence and playing it
+    /// </summary>
     private void Init()
     {
         
@@ -69,7 +70,10 @@ public class OrchestraLevelManager : MonoBehaviour
         IsPlayingMusicSequence = true;
         StartCoroutine(PlayMusicSequence());
     }
-
+    /// <summary>
+    /// ienumerator to start the coroutine and play the music sequence
+    /// </summary>
+    /// <returns>time to play the music sequence</returns>
     private IEnumerator PlayMusicSequence()
     {
         for(int i = 0; i < inputs.Count; i++)
@@ -80,7 +84,11 @@ public class OrchestraLevelManager : MonoBehaviour
         IsScreenActive = true;
         IsPlayingMusicSequence = false;
     }
-
+    /// <summary>
+    /// checks the musician player choses if it is compatible with the musician from the sequence
+    /// </summary>
+    /// <param name="number">number of the musician</param>
+    /// <returns>time to play winning music</returns>
     public IEnumerator CheckChoosenMusician(int number)
     {
         if (IsScreenActive && !IsPlayingMusicSequence && Time.deltaTime > 0)
@@ -93,9 +101,9 @@ public class OrchestraLevelManager : MonoBehaviour
                 StartCoroutine(controllers[number].PlayMusic());
                 if (curPosition == sequenceLength)
                 {
+                    levelUIController.AddScore(1 + score / 3);
                     yield return new WaitForSeconds(1f);
                     winningMusic.Play();
-                    levelUIController.AddScore(1 + score / 3);
                     score++;
                     Debug.Log(score);
                     if (score % 3 == 0)
@@ -121,6 +129,10 @@ public class OrchestraLevelManager : MonoBehaviour
 
         }
     }
+    /// <summary>
+    /// waits 1 second before the first start of the game
+    /// </summary>
+    /// <returns>time to wait</returns>
     private IEnumerator WaitUntillTheFirstStart()
     {
         yield return new WaitForSeconds(1f);

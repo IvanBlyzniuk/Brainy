@@ -31,7 +31,7 @@ public class BubbleLevelManagerController : MonoBehaviour
         if (FindObjectOfType<MainMusicController>() != null)
             Destroy(FindObjectOfType<MainMusicController>().gameObject);
         TimerController timer = FindObjectOfType<TimerController>();
-        GameObject.Destroy(timer.gameObject, 4f);
+        GameObject.Destroy(timer.gameObject, 3f);
         _spawnLB = leftSpawningBound.transform.position.x;
         _spawnRB = rightSpawningBound.transform.position.x;
         _spawnY = leftSpawningBound.transform.position.y;

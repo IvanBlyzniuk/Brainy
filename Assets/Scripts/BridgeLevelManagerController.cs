@@ -4,16 +4,16 @@ using System.IO;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
-
+/// <summary>
+/// class which controls te bridge game
+/// </summary>
 public class BridgeLevelManagerController : MonoBehaviour
 {
     private bool isActive = true;
     private bool lost = false;
-    //private int dictionaryLength = 0;
     private int curPosition = 0;
     private int level = 0;
     private int scoreToAdd = 1;
-    //private string path;
     private string selectedWord;
     private List<char> characters;
     private List<GameObject> objects;
@@ -45,7 +45,9 @@ public class BridgeLevelManagerController : MonoBehaviour
     private AudioSource winSound;
     private string[] words;
 
-
+    /// <summary>
+    /// Start is called before the first frame update
+    /// </summary>
     void Start()
     {
         if (FindObjectOfType<MainMusicController>()!= null)
@@ -60,7 +62,9 @@ public class BridgeLevelManagerController : MonoBehaviour
         Init();
     }
 
-    
+    /// <summary>
+    /// Update is called once per frame
+    /// </summary>
     void Update()
     {
         if (timer.GetCurrentTime()<=0 && isActive)
@@ -73,7 +77,10 @@ public class BridgeLevelManagerController : MonoBehaviour
             StartCoroutine(GoToTheLose());
         } 
     }
-
+    /// <summary>
+    /// choses the random word from the dictionary 
+    /// </summary>
+    /// <returns>randomly chosen word</returns>
     private string ChooseTheWord()
     {
         if (words == null)
@@ -82,7 +89,11 @@ public class BridgeLevelManagerController : MonoBehaviour
         string word = words[index];
         return word;
     }
-
+    /// <summary>
+    /// checks if the player choses the right letter
+    /// </summary>
+    /// <param name="letter">letter on which player clicks</param>
+    /// <returns>true if the letter is correct, otherwise - false</returns>
     public bool CheckLetter(char letter)
     {
         if (isActive && Time.deltaTime > 0)
@@ -109,7 +120,10 @@ public class BridgeLevelManagerController : MonoBehaviour
         return false;
 
     }
-
+    /// <summary>
+    /// shuffles the list of chars
+    /// </summary>
+    /// <param name="list">list to shuffle</param>
     public void Shuffle(List<char> list)
     {
         int firstIndex;
@@ -121,7 +135,12 @@ public class BridgeLevelManagerController : MonoBehaviour
             swap(list,firstIndex,secondIndex);
         }
     }
-
+    /// <summary>
+    /// swaps two elements of the list of given positions
+    /// </summary>
+    /// <param name="list">list of elements</param>
+    /// <param name="pos1">first element position</param>
+    /// <param name="pos2">second element position</param>
     private void swap(List<char> list, int pos1, int pos2)
     {
         char tmp;
@@ -129,6 +148,9 @@ public class BridgeLevelManagerController : MonoBehaviour
         list[pos1] = list[pos2];
         list[pos2] = tmp;
     }
+    /// <summary>
+    /// initiates the game conditions: moves the earth, choses the word and creates buttons with letters
+    /// </summary>
     private void Init()
     {
         isActive = true;
@@ -165,6 +187,9 @@ public class BridgeLevelManagerController : MonoBehaviour
         hero.transform.position = new Vector3(-8f,0f,0f);
         
     }
+    /// <summary>
+    /// adds one port of the bridge in certain place
+    /// </summary>
     private void BuildBridge()
     {
        
@@ -187,15 +212,28 @@ public class BridgeLevelManagerController : MonoBehaviour
         bridgeParts.Add(bridgePart);
     }
     
+    /// <summary>
+    /// return sprite width of a gameObject
+    /// </summary>
+    /// <param name="gameObject">gameObject to get sprite width</param>
+    /// <returns>width of the sprite of the object</returns>
     private float GetSpriteWidth(GameObject gameObject)
     {
         return gameObject.GetComponent<SpriteRenderer>().bounds.size.x;
     }
+    /// <summary>
+    /// return sprite heigth of a gameObject
+    /// </summary>
+    /// <param name="gameObject">gameObject to get sprite width heigth</param>
+    /// <returns>heigth of the sprite of the object</returns>
     private float GetSpriteHeigth(GameObject gameObject)
     {
         return gameObject.GetComponent<SpriteRenderer>().bounds.size.y;
     }
-
+    /// <summary>
+    /// ienumerator to start coroutine when we want player to go through the bridge and win the level
+    /// </summary>
+    /// <returns>time to wait</returns>
     IEnumerator GoToTheWin()
     {
         isActive = false;
@@ -207,6 +245,10 @@ public class BridgeLevelManagerController : MonoBehaviour
         yield return new WaitForSeconds(4f);
         RecreateGameConditions();
     }
+    /// <summary>
+    /// ienumerator to start coroutine when we want player to go through the unfinished bridge and lose the level
+    /// </summary>
+    /// <returns>time to wait</returns>
     IEnumerator GoToTheLose()
     {
         timer.IsActive = false;
@@ -223,7 +265,9 @@ public class BridgeLevelManagerController : MonoBehaviour
         }
         
     }
-
+    /// <summary>
+    /// restarts the level recreating different game conditions to their initial state
+    /// </summary>
     private void RecreateGameConditions()
     {
         foreach (GameObject gameObject in objects)
@@ -237,7 +281,10 @@ public class BridgeLevelManagerController : MonoBehaviour
         anim.SetFloat("Speed", hero.GetComponent<Rigidbody2D>().velocity.x);
         Init();
     }
-
+    /// <summary>
+    /// choses the difficulty in time for the current level
+    /// </summary>
+    /// <returns></returns>
     private float GetTimeForLevel()
     {
         switch (level)
